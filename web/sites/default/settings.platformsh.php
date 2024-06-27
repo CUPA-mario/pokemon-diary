@@ -14,6 +14,9 @@ $platformsh = new \Platformsh\ConfigReader\Config();
 // This is defined inside the read-only "config" directory, deployed via Git.
 $settings['config_sync_directory'] = '../config/sync';
 
+// This will prevent Drupal from setting read-only permissions on sites/default.
+$settings['skip_permissions_hardening'] = TRUE;
+
 // Configure the database.
 if ($platformsh->hasRelationship('database')) {
     $creds = $platformsh->credentials('database');
