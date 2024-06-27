@@ -22,5 +22,6 @@ To create a visually appealing, shareable Pokémon diary, allowing a user to reg
     - Step 1: Clone this [Repository](wwhttps://github.com/papaaldrin/pokemon-diary/)
     - Step 2: Open a terminal inside the directory and run `ddev start`
     - Step 3: run `ddev composer install`
+    - Step 4: run `ddevv start` to start DDEV services, link will be generated to access the site on your local machine
 
 <!-- Todo further information will be added once requirements has been wrapped up -->
