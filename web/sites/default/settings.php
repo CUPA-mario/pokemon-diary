@@ -29,9 +29,9 @@ $settings['file_scan_ignore_directories'] = [
 // $settings['hash_salt'] = 'change_me';
 
 // Automatic Platform.sh settings.
-// if (file_exists($app_root . '/' . $site_path . '/settings.platformsh.php')) {
-//   include $app_root . '/' . $site_path . '/settings.platformsh.php';
-// }
+if (file_exists($app_root . '/' . $site_path . '/settings.platformsh.php')) {
+  include $app_root . '/' . $site_path . '/settings.platformsh.php';
+}
 
 // ddev settings.
 if (file_exists($app_root . '/' . $site_path . '/settings.ddev.php')) {
