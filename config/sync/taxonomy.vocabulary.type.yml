@@ -1,0 +1,9 @@
+uuid: 621471f3-cd22-421f-bcac-bccd8146bced
+langcode: en
+status: true
+dependencies: {  }
+name: Type
+vid: type
+description: "A classification that determines a Pokémon's strengths, weaknesses, and abilities in battles."
+weight: 0
+new_revision: false

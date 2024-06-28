@@ -1,0 +1,17 @@
+uuid: 9ac93587-7598-45d5-8985-ad1ae076dc01
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Pokemon
+type: pokemon
+description: 'Pokémon are fictional creatures that inhabit the Pokémon world, each with unique abilities and characteristics.'
+help: null
+new_revision: false
+preview_mode: 2
+display_submitted: true
