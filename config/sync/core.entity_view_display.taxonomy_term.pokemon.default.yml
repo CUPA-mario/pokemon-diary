@@ -1,0 +1,23 @@
+uuid: a5654037-451d-4b8b-85d4-fdefcce11314
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.pokemon.field_id
+    - taxonomy.vocabulary.pokemon
+id: taxonomy_term.pokemon.default
+targetEntityType: taxonomy_term
+bundle: pokemon
+mode: default
+content:
+  field_id:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  description: true

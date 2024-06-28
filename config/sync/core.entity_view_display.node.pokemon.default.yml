@@ -1,0 +1,41 @@
+uuid: 654812e4-7b3d-42b5-9c30-6e43f2d41e9f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pokemon.field_location
+    - field.field.node.pokemon.field_photo
+    - node.type.pokemon
+  module:
+    - image
+    - user
+id: node.pokemon.default
+targetEntityType: node
+bundle: pokemon
+mode: default
+content:
+  field_location:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_photo:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }
