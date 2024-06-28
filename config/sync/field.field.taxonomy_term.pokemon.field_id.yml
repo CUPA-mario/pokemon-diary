@@ -1,0 +1,23 @@
+uuid: be085d3d-f9a7-4538-beaa-2d816fecb617
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_id
+    - taxonomy.vocabulary.pokemon
+id: taxonomy_term.pokemon.field_id
+field_name: field_id
+entity_type: taxonomy_term
+bundle: pokemon
+label: ID
+description: 'A unique identifier for the Pokémon.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

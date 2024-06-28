@@ -1,0 +1,9 @@
+uuid: 051a01db-097b-4a81-8710-992bbbfb704c
+langcode: en
+status: true
+dependencies: {  }
+name: Pokemon
+vid: pokemon
+description: 'Pokémon are fictional creatures that inhabit the Pokémon world, each with unique abilities and characteristics.'
+weight: 0
+new_revision: false
