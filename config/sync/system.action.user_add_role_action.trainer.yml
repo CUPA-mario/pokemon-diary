@@ -1,0 +1,14 @@
+uuid: d4d85d0a-3ea3-4bac-9d0e-a758b88d1570
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.trainer
+  module:
+    - user
+id: user_add_role_action.trainer
+label: 'Add the Trainer role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: trainer
