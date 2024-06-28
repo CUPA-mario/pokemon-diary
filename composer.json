@@ -20,6 +20,7 @@
         "drupal/core-project-message": "^10.3",
         "drupal/core-recommended": "^10.3",
         "drupal/pathauto": "^1.12",
+        "drupal/structure_sync": "^2.0",
         "drush/drush": "^12.5",
         "platformsh/config-reader": "^2.4"
     },
