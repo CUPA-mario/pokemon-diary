@@ -9,9 +9,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\pokeapi\Service\PokemonService;
 
 /**
- * Form to trigger Pokémon import.
+ * Form to trigger Location import.
  */
-class PokemonImportForm extends FormBase
+class LocationImportForm extends FormBase
 {
 
     /**
@@ -22,7 +22,7 @@ class PokemonImportForm extends FormBase
     protected $pokemonService;
 
     /**
-     * Constructs a new PokemonImportForm object.
+     * Constructs a new LocationImportForm object.
      *
      * @param \Drupal\pokeapi\Service\PokemonService $pokemon_service
      *   The Pokémon service.
@@ -47,7 +47,7 @@ class PokemonImportForm extends FormBase
      */
     public function getFormId()
     {
-        return 'pokemon_import_form';
+        return 'location_import_form';
     }
 
     /**
@@ -58,7 +58,7 @@ class PokemonImportForm extends FormBase
         $form['actions']['#type'] = 'actions';
         $form['actions']['submit'] = [
             '#type' => 'submit',
-            '#value' => $this->t('Import Pokémon'),
+            '#value' => $this->t('Import Location'),
             '#button_type' => 'primary',
         ];
 
@@ -72,14 +72,14 @@ class PokemonImportForm extends FormBase
     {
         // Start batch process.
         $batch = [
-            'title' => $this->t('Importing Pokémon names...'),
+            'title' => $this->t('Importing location...'),
             'operations' => [
-                ['\Drupal\pokeapi\Form\PokemonImportForm::batchProcess', []],
+                ['\Drupal\pokeapi\Form\LocationImportForm::batchProcess', []],
             ],
-            'finished' => '\Drupal\pokeapi\Form\PokemonImportForm::batchFinished',
-            'init_message' => $this->t('Starting Pokémon import...'),
+            'finished' => '\Drupal\pokeapi\Form\LocationImportForm::batchFinished',
+            'init_message' => $this->t('Starting Location import...'),
             'progress_message' => $this->t('Processed @current out of @total.'),
-            'error_message' => $this->t('An error occurred during Pokémon import.'),
+            'error_message' => $this->t('An error occurred during Location import.'),
         ];
 
         batch_set($batch);
@@ -100,7 +100,7 @@ class PokemonImportForm extends FormBase
         }
 
         // Import Pokémon names into taxonomy terms.
-        $vocabulary_name = 'pokemon'; // Replace with your actual vocabulary machine name.
+        $vocabulary_name = 'location'; // Replace with your actual vocabulary machine name.
         $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($vocabulary_name);
 
         for ($i = 0; $i < 10 && $context['sandbox']['current'] < $context['sandbox']['total']; $i++) {
@@ -109,7 +109,7 @@ class PokemonImportForm extends FormBase
                 'vid' => $vocabulary->id(),
                 'name' => self::cleanName($pokemon['name']),
             ]);
-            $term->set('field_id', self::getIdFromUrl($pokemon['url']));
+            $term->set('field_location_id', self::getIdFromUrl($pokemon['url']));
             try {
                 $term->save();
                 $context['sandbox']['current']++;
@@ -118,7 +118,7 @@ class PokemonImportForm extends FormBase
             }
 
             // Update progress information.
-            $context['message'] = t('Importing Pokémon: @current out of @total', [
+            $context['message'] = t('Importing location: @current out of @total', [
                 '@current' => $context['sandbox']['current'],
                 '@total' => $context['sandbox']['total'],
             ]);
@@ -132,10 +132,10 @@ class PokemonImportForm extends FormBase
     public static function batchFinished($success, $results, $operations)
     {
         if ($success) {
-            $message = t('Pokémon import completed successfully.');
+            $message = t('Location import completed successfully.');
         } else {
-            $message = t('An error occurred during Pokémon import. Please check logs for details.');
-            \Drupal::logger('pokeapi')->error('Pokémon import failed: @errors', ['@errors' => implode(', ', $results['errors'])]);
+            $message = t('An error occurred during Location import. Please check logs for details.');
+            \Drupal::logger('pokeapi')->error('Location import failed: @errors', ['@errors' => implode(', ', $results['errors'])]);
         }
 
         \Drupal::messenger()->addMessage($message);
@@ -143,8 +143,8 @@ class PokemonImportForm extends FormBase
 
     private static function cleanName($name)
     {
-        $pokemon_name = str_replace('-', ' ', $name);
-        return ucwords($pokemon_name);
+        $location_name = str_replace('-', ' ', $name);
+        return ucwords($location_name);
     }
 
     private static function getIdFromUrl($url)

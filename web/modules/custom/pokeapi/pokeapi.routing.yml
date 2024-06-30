@@ -5,3 +5,11 @@ pokeapi.import_form:
     _title: "Pokémon Import"
   requirements:
     _permission: "administer site configuration"
+
+pokeapi.location_import_form:
+  path: "/admin/structure/location-import"
+  defaults:
+    _form: 'Drupal\pokeapi\Form\LocationImportForm'
+    _title: "Location Import"
+  requirements:
+    _permission: "administer site configuration"
