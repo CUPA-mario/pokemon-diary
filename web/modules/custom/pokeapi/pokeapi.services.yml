@@ -1,0 +1,4 @@
+services:
+  pokeapi.pokemon_service:
+    class: 'Drupal\pokeapi\Service\PokemonService'
+    arguments: ["@http_client", "@logger.factory"]
