@@ -1,0 +1,22 @@
+uuid: faa25edc-6c51-4214-8fcd-ec1b5a88e5f3
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: pokemon
+label: Pokemon
+type: 'canonical_entities:node'
+pattern: '/pokemon/[current-user:name]/[node:title]'
+selection_criteria:
+  c92f2b49-330d-48ed-9349-d14d74ba96c2:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: c92f2b49-330d-48ed-9349-d14d74ba96c2
+    context_mapping:
+      node: node
+    bundles:
+      pokemon: pokemon
+selection_logic: and
+weight: -5
+relationships: {  }
