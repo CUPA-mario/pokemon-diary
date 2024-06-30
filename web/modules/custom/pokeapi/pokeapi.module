@@ -1,6 +1,15 @@
 <?php
 
 /**
+ * Implements hook_form_alter().
+ */
+function pokeapi_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id === 'node_pokemon_form' || $form_id === 'node_pokemon_edit_form') {
+    $form['#attached']['library'][] = 'pokeapi/pokemon_autocomplete';
+  }
+}
+
+/**
  * Delete all taxonomy terms from a vocabulary
  * @param $vid
  */
