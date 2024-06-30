@@ -13,3 +13,11 @@ pokeapi.location_import_form:
     _title: "Location Import"
   requirements:
     _permission: "administer site configuration"
+
+pokeapi.taxonomy_autocomplete:
+  path: '/taxonomy/autocomplete/{vocabulary}'
+  defaults:
+    _controller: '\Drupal\pokeapi\Controller\PokemonAutocompleteController::taxonomyAutocomplete'
+    _title: 'Autocomplete taxonomy terms'
+  requirements:
+    _permission: 'access content'
