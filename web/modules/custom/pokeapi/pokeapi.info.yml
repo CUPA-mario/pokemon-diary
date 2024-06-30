@@ -1,0 +1,7 @@
+name: "Pokémon Service"
+type: module
+description: "Provides a service to fetch Pokémon data."
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - drupal:taxonomy

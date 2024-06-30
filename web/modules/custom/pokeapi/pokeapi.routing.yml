@@ -1,0 +1,7 @@
+pokeapi.import_form:
+  path: "/admin/structure/pokemon-import"
+  defaults:
+    _form: 'Drupal\pokeapi\Form\PokemonImportForm'
+    _title: "Pokémon Import"
+  requirements:
+    _permission: "administer site configuration"

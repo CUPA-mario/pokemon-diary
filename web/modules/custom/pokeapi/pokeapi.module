@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Delete all taxonomy terms from a vocabulary
+ * @param $vid
+ */
+function delete_terms_from_vocab($vid) {
+
+  $tids = Drupal::entityQuery('taxonomy_term')
+    ->condition('vid', $vid)
+    ->accessCheck(false)
+    ->execute();
+
+  if (empty($tids)) {
+    return;
+  }
+
+  $term_storage = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term');
+  $entities = $term_storage->loadMultiple($tids);
+
+  $term_storage->delete($entities);
+}
