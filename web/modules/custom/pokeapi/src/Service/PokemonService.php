@@ -63,4 +63,16 @@ class PokemonService
         $response = $this->execute('/pokemon', ['limit' => 1500]);
         return $response ? $response['results'] : [];
     }
+
+    /**
+     * Fetches Pokémon data from PokeAPI.
+     *
+     * @return array
+     *   An array of Pokémon location.
+     */
+    public function getPokemonLocation()
+    {
+        $response = $this->execute('/location', ['limit' => 1500]);
+        return $response ? $response['results'] : [];
+    }
 }
