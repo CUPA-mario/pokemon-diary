@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.user.compact
+    - field.field.user.user.field_friend_code
     - field.field.user.user.field_terms_and_policy
     - field.field.user.user.field_trainer_name
     - field.field.user.user.user_picture
@@ -38,5 +39,6 @@ content:
     weight: 0
     region: content
 hidden:
+  field_friend_code: true
   field_terms_and_policy: true
   member_for: true
