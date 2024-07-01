@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_terms_and_policy
+    - field.field.user.user.field_trainer_name
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -15,18 +17,34 @@ targetEntityType: user
 bundle: user
 mode: default
 content:
-  member_for:
-    weight: 5
+  field_terms_and_policy:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_trainer_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
     region: content
   user_picture:
     type: image
     label: hidden
     settings:
-      image_style: thumbnail
       image_link: content
+      image_style: thumbnail
       image_loading:
         attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content
-hidden: {  }
+hidden:
+  member_for: true
