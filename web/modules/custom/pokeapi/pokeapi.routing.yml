@@ -6,14 +6,6 @@ pokeapi.import_form:
   requirements:
     _permission: "administer site configuration"
 
-pokeapi.content:
-  path: '/api' 
-  defaults: 
-    _controller: '\Drupal\pokeapi\Controller\PokemonAPIController::content' 
-    _title: 'Hello World'
-  requirements: 
-    _permission: 'access content' 
-
 pokeapi.location_import_form:
   path: "/admin/structure/location-import"
   defaults:
