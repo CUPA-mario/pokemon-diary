@@ -49,7 +49,7 @@ class PokemonService {
     }
     catch (\Exception $e) {
       $this->loggerFactory->get('pokeapi')->error('Error fetching Pokémon: @message', ['@message' => $e->getMessage()]);
-      return [];
+      return [ ];
     }
   }
 
