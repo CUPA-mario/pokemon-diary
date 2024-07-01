@@ -49,7 +49,7 @@ class PokemonService {
     }
     catch (\Exception $e) {
       $this->loggerFactory->get('pokeapi')->error('Error fetching Pokémon: @message', ['@message' => $e->getMessage()]);
-      return [];
+      return [ ];
     }
   }
 
@@ -72,6 +72,22 @@ class PokemonService {
    */
   public function getPokemonLocation() {
     $response = $this->execute('/location', ['limit' => 1500]);
+    return $response ? $response['results'] : [];
+  }
+
+  /**
+   * Fetches Pokemon by ID on Pokeapi endpoint.
+   */
+  public function getPokemonById($id) {
+    $response = $this->execute('/pokemon/' . $id);
+    return $response ? $response['results'] : [];
+  }
+
+  /**
+   * Fetches Location Area by ID on Pokeapi endpoint.
+   */
+  public function getLocationAreaById($id) {
+    $response = $this->execute('/location-area/' . $id);
     return $response ? $response['results'] : [];
   }
 
