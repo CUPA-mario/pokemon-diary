@@ -5,3 +5,11 @@ pokeapi.import_form:
     _title: "Pokémon Import"
   requirements:
     _permission: "administer site configuration"
+
+pokeapi.content:
+  path: '/example' 
+  defaults: 
+    _controller: '\Drupal\pokeapi\Controller\PokemonAPIController::content' 
+    _title: 'Hello World'
+  requirements: 
+    _permission: 'access content' 
