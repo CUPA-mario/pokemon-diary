@@ -1,0 +1,8 @@
+uuid: f0517e0e-df11-4925-999a-e54d9f9fdea6
+langcode: en
+status: true
+dependencies: {  }
+id: guest-main-menu
+label: 'Guest Main Menu'
+description: 'Menu for Guest users.'
+locked: false
