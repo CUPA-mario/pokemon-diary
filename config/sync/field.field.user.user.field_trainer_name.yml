@@ -1,0 +1,20 @@
+uuid: 9c7ea953-3d5a-41ac-9f5a-112351eb6a82
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_trainer_name
+  module:
+    - user
+id: user.user.field_trainer_name
+field_name: field_trainer_name
+entity_type: user
+bundle: user
+label: 'Trainer Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
