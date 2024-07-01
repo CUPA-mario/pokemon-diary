@@ -6,9 +6,7 @@ dependencies:
     - field.field.user.user.field_terms_and_policy
     - field.field.user.user.field_trainer_name
     - field.field.user.user.user_picture
-    - image.style.thumbnail
   module:
-    - image
     - path
     - user
 _core:
@@ -25,7 +23,7 @@ content:
     third_party_settings: {  }
   field_terms_and_policy:
     type: boolean_checkbox
-    weight: 4
+    weight: 3
     region: content
     settings:
       display_label: true
@@ -40,19 +38,12 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 3
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  user_picture:
-    type: image_image
     weight: 2
     region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+    settings: {  }
     third_party_settings: {  }
 hidden:
   contact: true
   language: true
   timezone: true
+  user_picture: true
