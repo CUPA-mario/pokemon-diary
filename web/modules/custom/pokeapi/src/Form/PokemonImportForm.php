@@ -87,7 +87,7 @@ class PokemonImportForm extends FormBase {
     // Fetch Pokémon names using the service.
     $pokemon_service = \Drupal::service('pokeapi.pokemon_service');
     if (!isset($context['sandbox']['pokemon_names'])) {
-      $context['sandbox']['pokemon_names'] = $pokemon_service->getPokemonLocation();
+      $context['sandbox']['pokemon_names'] = $pokemon_service->getPokemonNames();
       $context['sandbox']['total'] = count($context['sandbox']['pokemon_names']);
       $context['sandbox']['current'] = 0;
       $context['sandbox']['errors'] = [];
