@@ -80,7 +80,7 @@ class PokemonService {
    */
   public function getPokemonById($id) {
     $response = $this->execute('/pokemon/' . $id);
-    return $response ? $response['results'] : [];;     
+    return $response ? $response['results'] : [];
   }
 
   /**
@@ -88,9 +88,7 @@ class PokemonService {
    */
   public function getLocationAreaById($id) {
     $response = $this->execute('/location-area/' . $id);
-    return $response ? $response['results'] : [];;     
+    return $response ? $response['results'] : [];
   }
-
-
 
 }
