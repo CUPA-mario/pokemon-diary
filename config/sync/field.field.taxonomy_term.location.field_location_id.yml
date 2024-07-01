@@ -1,0 +1,23 @@
+uuid: c96d38e5-408b-42e4-8b25-09e6c6360c95
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_location_id
+    - taxonomy.vocabulary.location
+id: taxonomy_term.location.field_location_id
+field_name: field_location_id
+entity_type: taxonomy_term
+bundle: location
+label: ID
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
