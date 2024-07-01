@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_friend_code
     - field.field.user.user.field_terms_and_policy
     - field.field.user.user.field_trainer_name
     - field.field.user.user.user_picture
@@ -44,6 +45,7 @@ content:
     third_party_settings: {  }
 hidden:
   contact: true
+  field_friend_code: true
   language: true
   timezone: true
   user_picture: true

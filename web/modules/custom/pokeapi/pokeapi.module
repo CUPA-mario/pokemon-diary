@@ -1,11 +1,32 @@
 <?php
 
+use Drupal\Component\Utility\Random;
+
 /**
  * Implements hook_form_alter().
  */
 function pokeapi_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   if ($form_id === 'node_pokemon_form' || $form_id === 'node_pokemon_edit_form') {
     $form['#attached']['library'][] = 'pokeapi/pokemon_autocomplete';
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function pokeapi_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {
+  // Check if the inserted entity is a user.
+  if ($entity->getEntityTypeId() == 'user') {
+    // Check if the custom field exists.
+    if ($entity->hasField('field_friend_code')) {
+      // Generate a custom value.
+      $random = new Random();
+      $custom_value = $random->name(12, TRUE);
+      // Set the custom value to the field.
+      $entity->set('field_friend_code', $custom_value);
+      // Save the user entity with the new value.
+      $entity->save();
+    }
   }
 }
 
