@@ -55,34 +55,52 @@ class PokemonAPIController extends ControllerBase {
         }
     }
 
+    /**
+     * Customizable HTTPS request on Pokeapi endpoint.
+     */
     public function get(string $method = 'GET', string $path, array $query = []) {
         $this->httpClient->request($method, $this->url . '/' .  $path, [ 'query' => $query,
         ]);
     }
 
+    /**
+     * Get Pokemon on Pokeapi endpoint.
+     */
     public function getPokemon($query = []) {
         $response = $this->get('GET', 'pokemon', $query);
         return $response;     
     }
 
+    /**
+     * Get Location on Pokeapi endpoint.
+     */
     public function getLocationArea($query = []) {
         $response = $this->get('GET', 'location-area', $query);
         return $response;     
     }
 
+    /**
+     * Get Pokemon by ID on Pokeapi endpoint.
+     */
     public function getPokemonById($id) {
         $response = $this->get('GET', 'pokemon/' . $id);
         return $response;     
     }
 
+    /**
+     * Get Location Area by ID on Pokeapi endpoint.
+     */
     public function getLocationAreaById($id) {
         $response = $this->get('GET', 'location-area/' . $id);
         return $response;     
     }
 
+    /**
+     * controller content endpoint.
+     */
     public function content() {
         $build = [
-            '#markup' => $this->getLocationArea(),
+            '#markup' => $this->getPokemon($query),
         ];
         return $build;
     }
