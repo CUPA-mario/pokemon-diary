@@ -40,9 +40,9 @@ class PokemonService {
   /**
    * Initiates the get request.
    */
-  private function execute($path, $query = []) {
+  private function execute($path, $id = NULL, $query = []) {
     try {
-      $response = $this->httpClient->request('GET', 'https://pokeapi.co/api/v2' . $path, [
+      $response = $this->httpClient->request('GET', 'https://pokeapi.co/api/v2' . $path . $id, [
         'query' => $query,
       ]);
       return json_decode($response->getBody()->getContents(), TRUE);
@@ -72,6 +72,22 @@ class PokemonService {
    */
   public function getPokemonLocation() {
     $response = $this->execute('/location', ['limit' => 1500]);
+    return $response ? $response['results'] : [];
+  }
+
+  /**
+   * Fetches Pokemon by ID on Pokeapi endpoint.
+   */
+  public function getPokemonById($id) {
+    $response = $this->execute('/pokemon/' . $id);
+    return $response ? $response['results'] : [];
+  }
+
+  /**
+   * Fetches Location Area by ID on Pokeapi endpoint.
+   */
+  public function getLocationAreaById($id) {
+    $response = $this->execute('/location-area/' . $id);
     return $response ? $response['results'] : [];
   }
 
