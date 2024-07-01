@@ -40,16 +40,16 @@ class PokemonService {
   /**
    * Initiates the get request.
    */
-  private function execute($path, $id = NULL, $query = []) {
+  private function execute($path, $query = []) {
     try {
-      $response = $this->httpClient->request('GET', 'https://pokeapi.co/api/v2' . $path . $id, [
+      $response = $this->httpClient->request('GET', 'https://pokeapi.co/api/v2' . $path, [
         'query' => $query,
       ]);
       return json_decode($response->getBody()->getContents(), TRUE);
     }
     catch (\Exception $e) {
       $this->loggerFactory->get('pokeapi')->error('Error fetching Pokémon: @message', ['@message' => $e->getMessage()]);
-      return [];
+      return [ ];
     }
   }
 
