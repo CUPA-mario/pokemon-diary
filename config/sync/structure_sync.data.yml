@@ -1,3 +1,121 @@
+menus:
+  -
+    menu_name: guest-main-menu
+    title: Home
+    parent: null
+    uri: 'internal:/'
+    link_title: ''
+    description: null
+    enabled: true
+    expanded: false
+    weight: -50
+    langcode: en
+    uuid: c757ca44-1d54-48b8-81ad-fca6dd2216e3
+    options: {  }
+  -
+    menu_name: trainer-main-menu
+    title: Home
+    parent: null
+    uri: 'internal:/'
+    link_title: ''
+    description: null
+    enabled: true
+    expanded: false
+    weight: -50
+    langcode: en
+    uuid: e87eee48-9be2-43ee-88a1-fbc3a7519051
+    options: {  }
+  -
+    menu_name: guest-main-menu
+    title: Dashboard
+    parent: null
+    uri: 'internal:/dashboard'
+    link_title: ''
+    description: null
+    enabled: true
+    expanded: false
+    weight: -49
+    langcode: en
+    uuid: 505aeae9-940b-4bfc-a7b2-916167ac29ed
+    options: {  }
+  -
+    menu_name: guest-main-menu
+    title: Diary
+    parent: null
+    uri: 'internal:/diary'
+    link_title: ''
+    description: null
+    enabled: true
+    expanded: false
+    weight: -48
+    langcode: en
+    uuid: f2e3d1bb-05e3-4e55-95ff-6f28d7ed0eb0
+    options: {  }
+  -
+    menu_name: guest-main-menu
+    title: About
+    parent: null
+    uri: 'internal:/about'
+    link_title: ''
+    description: null
+    enabled: true
+    expanded: false
+    weight: -47
+    langcode: en
+    uuid: 01fa6c5f-78da-4ddc-91c7-ffebeaebf477
+    options: {  }
+  -
+    menu_name: guest-main-menu
+    title: Contact
+    parent: null
+    uri: 'internal:/contact-us'
+    link_title: ''
+    description: null
+    enabled: true
+    expanded: false
+    weight: -46
+    langcode: en
+    uuid: 37bf4d40-75c2-476d-89e0-25f4047e3088
+    options: {  }
+  -
+    menu_name: trainer-main-menu
+    title: Diary
+    parent: null
+    uri: 'internal:/my-diary'
+    link_title: ''
+    description: null
+    enabled: true
+    expanded: false
+    weight: -49
+    langcode: en
+    uuid: 80e978a3-31fe-414b-9bb1-ab9a531f332d
+    options: {  }
+  -
+    menu_name: trainer-main-menu
+    title: 'View Diary'
+    parent: null
+    uri: 'internal:/my-diary/view'
+    link_title: ''
+    description: null
+    enabled: true
+    expanded: false
+    weight: -48
+    langcode: en
+    uuid: bd480939-8e25-4573-a659-e8361df96fbd
+    options: {  }
+  -
+    menu_name: trainer-main-menu
+    title: 'Add Pokémon entry'
+    parent: null
+    uri: 'internal:/my-diary/add'
+    link_title: ''
+    description: null
+    enabled: true
+    expanded: false
+    weight: -47
+    langcode: en
+    uuid: 9d6efaad-885d-4690-a239-910195e05d61
+    options: {  }
 taxonomies:
   location: {  }
   pokemon: {  }

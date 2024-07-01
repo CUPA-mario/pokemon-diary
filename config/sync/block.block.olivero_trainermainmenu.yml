@@ -1,0 +1,35 @@
+uuid: d90a9b7c-7035-4b00-9759-ab87cb281c16
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.trainer-main-menu
+  module:
+    - system
+    - user
+  theme:
+    - olivero
+id: olivero_trainermainmenu
+theme: olivero
+region: primary_menu
+weight: 0
+provider: null
+plugin: 'system_menu_block:trainer-main-menu'
+settings:
+  id: 'system_menu_block:trainer-main-menu'
+  label: 'Trainer Main Menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 3
+  expand_all_items: false
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated
+      administrator: administrator
+      trainer: trainer
