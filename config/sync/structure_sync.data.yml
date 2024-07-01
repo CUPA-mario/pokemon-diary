@@ -1,3 +1,43 @@
+menus:
+  -
+    menu_name: footer
+    title: About
+    parent: null
+    uri: 'internal:/about-us'
+    link_title: ''
+    description: null
+    enabled: true
+    expanded: false
+    weight: 1
+    langcode: en
+    uuid: 2692aed9-551f-4544-896e-cca9c36d4651
+    options: {  }
+  -
+    menu_name: footer
+    title: 'Privacy policy'
+    parent: null
+    uri: 'internal:/privacy-policy'
+    link_title: ''
+    description: null
+    enabled: true
+    expanded: false
+    weight: 3
+    langcode: en
+    uuid: b7a09fa1-c177-4e87-872a-a745145328ee
+    options: {  }
+  -
+    menu_name: footer
+    title: 'Terms of Service'
+    parent: null
+    uri: 'internal:/terms-of-service'
+    link_title: ''
+    description: null
+    enabled: true
+    expanded: false
+    weight: 4
+    langcode: en
+    uuid: d501b920-67c1-4d88-9501-dddf27040e00
+    options: {  }
 taxonomies:
   location: {  }
   pokemon: {  }
