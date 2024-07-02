@@ -1,0 +1,21 @@
+uuid: 5ac6cec2-d961-4832-a253-c46522bd97f2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_trainer_name
+    - node.type.testimonials
+id: node.testimonials.field_trainer_name
+field_name: field_trainer_name
+entity_type: node
+bundle: testimonials
+label: 'Trainer Name'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '[current-user:display-name]'
+default_value_callback: ''
+settings: {  }
+field_type: string
