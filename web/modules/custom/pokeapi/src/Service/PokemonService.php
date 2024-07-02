@@ -2,6 +2,7 @@
 
 namespace Drupal\pokeapi\Service;
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use GuzzleHttp\ClientInterface;
 
@@ -39,6 +40,11 @@ class PokemonService {
 
   /**
    * Initiates the get request.
+   *
+   * @param string $path
+   *   Resource path.
+   * @param mixed $query
+   *   Additional options.
    */
   private function execute($path, $query = []) {
     try {
@@ -49,7 +55,7 @@ class PokemonService {
     }
     catch (\Exception $e) {
       $this->loggerFactory->get('pokeapi')->error('Error fetching Pokémon: @message', ['@message' => $e->getMessage()]);
-      return [ ];
+      return [];
     }
   }
 
@@ -76,11 +82,35 @@ class PokemonService {
   }
 
   /**
-   * Fetches Pokemon by ID on Pokeapi endpoint.
+   * Fetches Pokemon by ID or Name on Pokeapi endpoint.
+   *
+   * @param mixed $pokemon
+   *   ID or Name of the Pokemon.
+   */
+  public function getPokemon($pokemon = '') {
+    return $this->execute('/pokemon/' . $pokemon);
+  }
+
+  /**
+   * Retrieves Pokémon data using Name.
+   *
+   * @param string $name
+   *   Name of the Pokemon.
+   */
+  public function getPokemonByName($name) {
+    $name = strtolower($name);
+    $name = Html::cleanCssIdentifier($name);
+    return $this->getPokemon($name);
+  }
+
+  /**
+   * Retrieves Pokémon data using ID.
+   *
+   * @param int $id
+   *   ID of the Pokemon.
    */
   public function getPokemonById($id) {
-    $response = $this->execute('/pokemon/' . $id);
-    return $response ? $response['results'] : [];
+    return $this->getPokemon($id);
   }
 
   /**
