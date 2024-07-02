@@ -23,6 +23,7 @@
         "drupal/core-recommended": "^10.3",
         "drupal/metatag": "^2.0",
         "drupal/pathauto": "^1.12",
+        "drupal/registration_role": "^2.0",
         "drupal/structure_sync": "^2.0",
         "drush/drush": "^12.5",
         "platformsh/config-reader": "^2.4"
