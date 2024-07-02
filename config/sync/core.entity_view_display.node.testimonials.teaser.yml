@@ -1,0 +1,24 @@
+uuid: ad306c82-c37f-476e-84c6-15c91a43a252
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.testimonials.field_testimonial_text
+    - field.field.node.testimonials.field_trainer_name
+    - node.type.testimonials
+  module:
+    - user
+id: node.testimonials.teaser
+targetEntityType: node
+bundle: testimonials
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_testimonial_text: true
+  field_trainer_name: true

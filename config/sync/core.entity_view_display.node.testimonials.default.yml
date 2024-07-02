@@ -1,0 +1,36 @@
+uuid: 388bce41-d5e0-45f8-9a0c-bc03880975e5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.testimonials.field_testimonial_text
+    - field.field.node.testimonials.field_trainer_name
+    - node.type.testimonials
+  module:
+    - user
+id: node.testimonials.default
+targetEntityType: node
+bundle: testimonials
+mode: default
+content:
+  field_testimonial_text:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_trainer_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }
