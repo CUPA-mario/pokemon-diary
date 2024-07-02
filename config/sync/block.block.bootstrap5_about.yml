@@ -1,0 +1,30 @@
+uuid: ebba93dd-3b65-4579-ac7e-20be9d94c148
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:704144bd-bea5-4854-8a04-ff8335ffa57b'
+  module:
+    - block_content
+    - system
+  theme:
+    - bootstrap5
+id: bootstrap5_about
+theme: bootstrap5
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:704144bd-bea5-4854-8a04-ff8335ffa57b'
+settings:
+  id: 'block_content:704144bd-bea5-4854-8a04-ff8335ffa57b'
+  label: About
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /about
