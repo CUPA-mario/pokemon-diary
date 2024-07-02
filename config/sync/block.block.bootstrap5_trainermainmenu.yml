@@ -1,0 +1,35 @@
+uuid: a4160793-754e-4d1d-b0fb-042acc59c79c
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.trainer-main-menu
+  module:
+    - system
+    - user
+  theme:
+    - bootstrap5
+id: bootstrap5_trainermainmenu
+theme: bootstrap5
+region: nav_main
+weight: 0
+provider: null
+plugin: 'system_menu_block:trainer-main-menu'
+settings:
+  id: 'system_menu_block:trainer-main-menu'
+  label: 'Trainer Main Menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 3
+  expand_all_items: false
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated
+      administrator: administrator
+      trainer: trainer
