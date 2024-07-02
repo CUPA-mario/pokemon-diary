@@ -32,7 +32,7 @@ menus:
     uri: 'internal:/dashboard'
     link_title: ''
     description: null
-    enabled: true
+    enabled: false
     expanded: false
     weight: -49
     langcode: en
@@ -45,7 +45,7 @@ menus:
     uri: 'internal:/diary'
     link_title: ''
     description: null
-    enabled: true
+    enabled: false
     expanded: false
     weight: -48
     langcode: en
@@ -71,7 +71,7 @@ menus:
     uri: 'internal:/contact-us'
     link_title: ''
     description: null
-    enabled: true
+    enabled: false
     expanded: false
     weight: -46
     langcode: en
@@ -93,28 +93,41 @@ menus:
   -
     menu_name: trainer-main-menu
     title: 'View Diary'
-    parent: null
+    parent: 'menu_link_content:80e978a3-31fe-414b-9bb1-ab9a531f332d'
     uri: 'internal:/my-diary/view'
     link_title: ''
     description: null
     enabled: true
     expanded: false
-    weight: -48
+    weight: -50
     langcode: en
     uuid: bd480939-8e25-4573-a659-e8361df96fbd
     options: {  }
   -
     menu_name: trainer-main-menu
     title: 'Add Pokémon entry'
-    parent: null
+    parent: 'menu_link_content:80e978a3-31fe-414b-9bb1-ab9a531f332d'
     uri: 'internal:/my-diary/add'
     link_title: ''
     description: null
     enabled: true
     expanded: false
-    weight: -47
+    weight: -49
     langcode: en
     uuid: 9d6efaad-885d-4690-a239-910195e05d61
+    options: {  }
+  -
+    menu_name: trainer-main-menu
+    title: About
+    parent: null
+    uri: 'internal:/about'
+    link_title: ''
+    description: null
+    enabled: true
+    expanded: false
+    weight: 0
+    langcode: en
+    uuid: 3166c147-3f07-4410-955d-87ae3a122aaa
     options: {  }
 taxonomies:
   location: {  }
