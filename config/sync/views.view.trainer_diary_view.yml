@@ -158,7 +158,7 @@ display:
             type: 'entity:user'
             fail: 'not found'
           validate_options:
-            access: true
+            access: false
             operation: view
             multiple: 0
             restrict_roles: false
