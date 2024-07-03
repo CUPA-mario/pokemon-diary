@@ -76,7 +76,8 @@ hooks:
     set -e
     echo "Running composer install --no-dev"
     composer install --no-dev --optimize-autoloader --prefer-dist
-    drush sql-cli < /app/tmp/content.sql
+    echo "Running database sync ..."
+    vendor/bin/drush sql-cli < /app/tmp/content.sql
   # The deploy hook runs after your application has been deployed and started.
   # Code cannot be modified at this point but the database is available.
   # The site is not accepting requests while this script runs so keep it
