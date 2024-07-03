@@ -1,0 +1,29 @@
+uuid: 0969f0b6-9235-4a35-a21a-0aaa37e96c21
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.testimonials
+  module:
+    - system
+    - views
+  theme:
+    - bootstrap5
+id: bootstrap5_views_block__testimonials_block_1
+theme: bootstrap5
+region: content
+weight: -2
+provider: null
+plugin: 'views_block:testimonials-block_1'
+settings:
+  id: 'views_block:testimonials-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /home
