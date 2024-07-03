@@ -17,40 +17,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `block_content`
---
-
-DROP TABLE IF EXISTS `block_content`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `block_content` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `revision_id` int(10) unsigned DEFAULT NULL,
-  `type` varchar(32) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL COMMENT 'The ID of the target entity.',
-  `uuid` varchar(128) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
-  `langcode` varchar(12) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `block_content_field__uuid__value` (`uuid`),
-  UNIQUE KEY `block_content__revision_id` (`revision_id`),
-  KEY `block_content_field__type__target_id` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='The base table for block_content entities.';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `block_content`
---
-
-LOCK TABLES `block_content` WRITE;
-/*!40000 ALTER TABLE `block_content` DISABLE KEYS */;
-set autocommit=0;
-INSERT INTO `block_content` VALUES
-(5,6,'basic','575d631e-c571-47ae-bb37-debc26beeba7','en'),
-(6,7,'basic','cf0d7dc8-0478-4dc3-8f34-3e726976274b','en');
-/*!40000 ALTER TABLE `block_content` ENABLE KEYS */;
-UNLOCK TABLES;
-commit;
-
---
 -- Table structure for table `node`
 --
 
@@ -7246,4 +7212,4 @@ commit;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-03  7:46:19
+-- Dump completed on 2024-07-03  9:38:05

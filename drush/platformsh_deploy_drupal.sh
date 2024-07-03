@@ -9,7 +9,7 @@ DRUSH_CMD="drush --root=/app/web --uri=https://develop-sr3snxi-7vmrylydihhra.us.
 
 if [ -n "$($DRUSH_CMD status --field=bootstrap)" ]; then
   echo "Running database sync..."
-  $DRUSH_CMD sql-cli < /app/web/content.sql
+  $DRUSH_CMD sql-cli -v < /app/web/content.sql
   $DRUSH_CMD cache-rebuild
   $DRUSH_CMD updatedb
   if [ -n "$(ls $($DRUSH_CMD php:eval "echo realpath(Drupal\Core\Site\Settings::get('config_sync_directory'));")/*.yml 2>/dev/null)" ]; then
