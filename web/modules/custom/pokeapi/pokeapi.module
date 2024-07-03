@@ -1,6 +1,29 @@
 <?php
 
 use Drupal\Component\Utility\Random;
+use Drupal\user\Entity\User;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_views_pre_view().
+ */
+function pokeapi_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+  if ($view->id() == 'trainer_diary_view' && $display_id == 'page_1') {
+    /** Searches if friend code exists before querying the user id */
+    $query = \Drupal::entityQuery('user')
+      ->accessCheck(FALSE)
+      ->condition('field_friend_code', $args[0]);
+    $user_id = $query->execute();
+    $args[0] = $user_id ? key($user_id) : $args[0];
+    $user = User::load($args[0]);
+    /** Set dynamic value for user header based on loaded user */
+    $options = $view->display_handler->getOption('header');
+    if ($options['entity_user']) {
+      $options['entity_user']['target'] = $user->uuid();
+    }
+    $view->display_handler->overrideOption('header', $options);
+  }
+}
 
 /**
  * Implements hook_form_alter().
@@ -62,10 +85,10 @@ function pokeapi_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface 
     if ($entity->hasField('field_photo')) {
       $name = $entity->get('title')->value;
       $image_url = $entity->get('field_photo')->value;
-  
+
       if (empty($image_url)) {
         $results = \Drupal::service('pokeapi.pokemon_service')->getPokemonByName($name);
-  
+
         if ($results) {
           $image_url = $results['sprites']['other']['official-artwork']['front_default'];
           $image = sprintf('<img src="%s" />', $image_url);
@@ -73,7 +96,7 @@ function pokeapi_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface 
             '#markup' => '<div class="pokemon-image">'.$image.'</div>',
             '#weight' => 100,
           ];
-  
+
           $types = [];
           foreach ($results['types'] as $type) {
             $types[] = ucwords($type['type']['name']);
