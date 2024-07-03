@@ -31,6 +31,29 @@ function pokeapi_views_pre_view(ViewExecutable $view, $display_id, array &$args)
 function pokeapi_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   if ($form_id === 'node_pokemon_form' || $form_id === 'node_pokemon_edit_form') {
     $form['#attached']['library'][] = 'pokeapi/pokemon_autocomplete';
+    $form['#validate'][] = 'pokeapi_form_validate';
+  }
+}
+
+/**
+ * Custom validation handler for the Pokémon name.
+ */
+function pokeapi_form_validate($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  // Get the value from the form.
+  $field_value = $form_state->getValue('title')[0]['value'];
+
+  // Define the vocabulary ID.
+  $vocabulary_id = 'pokemon';
+
+  // Load terms from the vocabulary.
+  $check = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties([
+    'vid' => $vocabulary_id,
+    'name' => $field_value,
+  ]);
+
+  // Check if the term exists.
+  if (empty($check)) {
+    $form_state->setErrorByName('title', t('Pokémon Name should be valid.'));
   }
 }
 
