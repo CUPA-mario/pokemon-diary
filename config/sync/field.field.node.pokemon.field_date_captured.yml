@@ -1,0 +1,24 @@
+uuid: d165411c-0c41-4ee5-bd51-aa285c673d81
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date_captured
+    - node.type.pokemon
+  module:
+    - datetime
+id: node.pokemon.field_date_captured
+field_name: field_date_captured
+entity_type: node
+bundle: pokemon
+label: 'Date captured'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

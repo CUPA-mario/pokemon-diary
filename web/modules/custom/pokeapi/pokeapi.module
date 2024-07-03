@@ -32,6 +32,10 @@ function pokeapi_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_s
   if ($form_id === 'node_pokemon_form' || $form_id === 'node_pokemon_edit_form') {
     $form['#attached']['library'][] = 'pokeapi/pokemon_autocomplete';
     $form['#validate'][] = 'pokeapi_form_validate';
+
+    $title = '<h2>Get started with your <br> Pokémon adventure</h2>';
+    $desc = '<p>Log each Pokémon you catch wit all it\'s details.<br>Celeberate every encounter in your personal<br>PokéDiary. Dive into the fun and let your journey<br>unfold.</p>';
+    $form['field_photo']['#prefix'] = $title . $desc;
   }
 }
 
