@@ -43,6 +43,21 @@ To create a visually appealing, shareable Pokémon diary, allowing a user to reg
     - Merging codes to develop
         - after `git push` on your feature branches, create a pull request ticket on repository to have your codes reviewed.
 
+- Syncing Database Between Platform.sh and Local Environment
+    
+    - Pulling database changes from Platform.sh
+        - Before working on your feature branch, ensure your local database is synced with the latest database from Platform.sh:
+        - run `git checkout develop`
+        - run `ddev pull platform --skip-files --skip-confirmation --skip-import -y`
+        *this command fetches the latest database changes without importing files, confirming prompts, or requiring user input.
+
+    - Pushing local database changes to Platform.sh
+        - After completing your feature and merging it into the develop branch, update Platform.sh with your local database changes:
+        - run `git checkout develop`
+        - run `git pull origin develop`
+        - run `ddev push platform --skip-files --skip-confirmation --skip-import -y`
+        *this command pushes your local database changes to Platform.sh, ensuring synchronization across environments.
+
 *Thank you for taking time to read this documentation. - CUPA - Mario Collaborators*
 
 <!-- Todo further information will be added once requirements has been wrapped up -->
