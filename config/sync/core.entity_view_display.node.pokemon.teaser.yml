@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.pokemon.field_date_captured
     - field.field.node.pokemon.field_location
     - field.field.node.pokemon.field_photo
     - node.type.pokemon
@@ -27,5 +28,6 @@ content:
     weight: 0
     region: content
 hidden:
+  field_date_captured: true
   field_location: true
   links: true
