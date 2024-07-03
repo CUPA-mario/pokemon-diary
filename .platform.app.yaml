@@ -64,7 +64,7 @@ mounts:
     source: local
     source_path: "console"
   # custom folder for content.sql
-  "/dbcontent":
+  "/dbcontents":
       source: local
       source_path: dbcontent
 
