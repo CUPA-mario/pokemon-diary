@@ -232,6 +232,27 @@ display:
     display_plugin: page
     position: 1
     display_options:
+      filters:
+        entity_user:
+          id: entity_user
+          table: views
+          field: entity_user
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: entity
+          empty: true
+          target: ''
+          view_mode: trainer_diary
+          tokenize: true
+          bypass_access: true
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        filters: false
+        filter_groups: false
       display_extenders: {  }
       path: trainer/%code/diary
     cache_metadata:
