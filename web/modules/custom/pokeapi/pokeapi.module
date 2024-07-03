@@ -34,8 +34,16 @@ function pokeapi_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_s
     $form['#validate'][] = 'pokeapi_form_validate';
 
     $title = '<h2>Get started with your <br> Pokémon adventure</h2>';
-    $desc = '<p>Log each Pokémon you catch wit all it\'s details.<br>Celeberate every encounter in your personal<br>PokéDiary. Dive into the fun and let your journey<br>unfold.</p>';
+    $desc = '<p>Log each Pokémon you catch with all its details.<br>' .
+      'Celebrate every encounter in your personal<br>' .
+      'PokéDiary. Dive into the fun and let your journey<br>unfold.</p>';
     $form['field_photo']['#prefix'] = $title . $desc;
+
+    // Check if the form has an actions array with a submit button.
+    if (isset($form['actions']['submit']['#value'])) {
+      // Change the text of the save button.
+      $form['actions']['submit']['#value'] = t('Add entry');
+    }
   }
 }
 
