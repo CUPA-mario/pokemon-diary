@@ -8,7 +8,7 @@
 
 if [ -n "$(drush status --field=bootstrap)" ]; then
   echo "Running database sync..."
-  drush sql-cli --root=/app/web --uri=https://develop-sr3snxi-7vmrylydihhra.us.platformsh.site < /app/dbcontent/content.sql
+  drush sql-cli --root=/app/web --uri=https://develop-sr3snxi-7vmrylydihhra.us.platformsh.site < /app/web/content.sql
   drush -y cache-rebuild
   drush -y updatedb
   if [ -n "$(ls $(drush php:eval "echo realpath(Drupal\Core\Site\Settings::get('config_sync_directory'));")/*.yml 2>/dev/null)" ]; then
