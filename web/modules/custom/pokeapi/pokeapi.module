@@ -116,10 +116,12 @@ function pokeapi_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface 
       '#weight' => 300,
     ];
 
-    $location = $entity->get('field_location')->value;
-    $build['location'] = [
-      '#markup' => '<div class="pokemon-location">'.$location.'</div>',
-      '#weight' => 400,
-    ];
+    if ($entity->hasField('field_location')) {
+      $location = $entity->get('field_location')->value;
+      $build['location'] = [
+        '#markup' => '<div class="pokemon-location">'.$location.'</div>',
+        '#weight' => 400,
+      ];
+    }
   }
 }
