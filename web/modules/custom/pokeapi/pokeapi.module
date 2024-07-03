@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Component\Utility\Random;
+use Drupal\user\Entity\User;
 use Drupal\views\ViewExecutable;
 
 /**
@@ -13,7 +14,14 @@ function pokeapi_views_pre_view(ViewExecutable $view, $display_id, array &$args)
       ->accessCheck(FALSE)
       ->condition('field_friend_code', $args[0]);
     $user_id = $query->execute();
-    $args[0] = key($user_id) ?? $args[0];
+    $args[0] = $user_id ? key($user_id) : $args[0];
+    $user = User::load($args[0]);
+    /** Set dynamic value for user header based on loaded user */
+    $options = $view->display_handler->getOption('header');
+    if ($options['entity_user']) {
+      $options['entity_user']['target'] = $user->uuid();
+    }
+    $view->display_handler->overrideOption('header', $options);
   }
 }
 
