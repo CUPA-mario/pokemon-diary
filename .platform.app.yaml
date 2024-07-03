@@ -63,10 +63,6 @@ mounts:
   "/.console":
     source: local
     source_path: "console"
-  # custom folder for content.sql
-  "/dbcontents":
-      source: local
-      source_path: dbcontent
 
 # Configuration of the build of this application.
 build:
