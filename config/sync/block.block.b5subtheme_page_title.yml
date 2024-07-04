@@ -9,7 +9,7 @@ _core:
 id: b5subtheme_page_title
 theme: b5subtheme
 region: content
-weight: -6
+weight: -7
 provider: null
 plugin: page_title_block
 settings:

@@ -11,7 +11,7 @@ _core:
 id: b5subtheme_content
 theme: b5subtheme
 region: content
-weight: -1
+weight: -3
 provider: null
 plugin: system_main_block
 settings:

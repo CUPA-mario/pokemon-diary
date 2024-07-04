@@ -1,0 +1,30 @@
+uuid: 63e240c4-a3c5-4daa-aa15-41dc4f2df96c
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:575d631e-c571-47ae-bb37-debc26beeba7'
+  module:
+    - block_content
+    - system
+  theme:
+    - b5subtheme
+id: b5subtheme_feature
+theme: b5subtheme
+region: content
+weight: -2
+provider: null
+plugin: 'block_content:575d631e-c571-47ae-bb37-debc26beeba7'
+settings:
+  id: 'block_content:575d631e-c571-47ae-bb37-debc26beeba7'
+  label: Feature
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /home

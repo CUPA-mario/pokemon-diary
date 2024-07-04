@@ -1,0 +1,30 @@
+uuid: bf4cd028-d9e9-4d9f-95fc-250b1bf0df9a
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:cf0d7dc8-0478-4dc3-8f34-3e726976274b'
+  module:
+    - block_content
+    - system
+  theme:
+    - b5subtheme
+id: b5subtheme_socialproof
+theme: b5subtheme
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:cf0d7dc8-0478-4dc3-8f34-3e726976274b'
+settings:
+  id: 'block_content:cf0d7dc8-0478-4dc3-8f34-3e726976274b'
+  label: 'Social Proof'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /home
