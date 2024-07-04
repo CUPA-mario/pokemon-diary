@@ -1,4 +1,4 @@
-header .navbar.bg-dark {
+header[role="banner"] {
   background-color: #93C68E !important;
 }
 
@@ -6,7 +6,7 @@ header .navbar.bg-dark {
   color: #333333;
 }
 
-footer.bg-secondary {
+footer[role="contentinfo"] {
   background-color: #FFCB05 !important;
 }
 
