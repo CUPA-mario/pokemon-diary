@@ -1,0 +1,15 @@
+header .navbar.bg-dark {
+  background-color: #93C68E !important;
+}
+
+.navbar a {
+  color: #333333;
+}
+
+footer.bg-secondary {
+  background-color: #FFCB05 !important;
+}
+
+footer.bg-secondary span, footer.bg-secondary a {
+  color: #333333;
+}
