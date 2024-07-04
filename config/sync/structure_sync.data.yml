@@ -56,7 +56,7 @@ menus:
     menu_name: trainer-main-menu
     title: 'Add Pokémon entry'
     parent: null
-    uri: 'internal:/diary/add'
+    uri: 'internal:/node/add/pokemon'
     link_title: ''
     description: null
     enabled: true
