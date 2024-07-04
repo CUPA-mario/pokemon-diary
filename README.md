@@ -30,15 +30,12 @@ To create a visually appealing, shareable Pokémon diary, allowing a user to reg
         - run `ddev snapshot restore` to sync with the base Drupal Project configuration.
         - run `ddev restart` to ensure the configurations are applied properly .and restart services.
         - run `ddev composer install`.
-        - run `ddev drush cr` to rebuild existing cache.
-        - run `ddev drush cim -y` to acquire latest yml changes.
+        - run `ddev drush deploy` to code deployment.
         - report if there's any error occuring at this point.
 
     - Routine development
         - pull from `develop` via running `git pull origin develop` to ensure your branches is up to date. *Note: Do this before creating branches, Before committing and pushing branches, or when Important commits are pushed on develop branch.* 
-        - run `ddev drush cr`.
-        - run `ddev drush cim -y`.
-        - run `ddev drush cr` again.
+        - run `ddev drush deploy`.
 
     - Merging codes to develop
         - after `git push` on your feature branches, create a pull request ticket on repository to have your codes reviewed.
