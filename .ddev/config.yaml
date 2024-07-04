@@ -259,9 +259,9 @@ web_environment:
 # and you can't erase existing hooks or all environment variables.
 # However, with "override_config: true" in a particular config.*.yaml file,
 # 'use_dns_when_possible: false' can override the existing values, and
-hooks:
-  post-start:
-    - exec-host: ./custom-mysqldump.sh
+#hooks:
+#  post-start:
+#    - exec-host: ./custom-mysqldump.sh
 # or
 # web_environment: []
 # or
