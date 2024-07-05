@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * Implements hook_form_alter().
+ */
+function pokecustomlink_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+  if ($form_id === 'user_login_form') {
+
+    $form['register_link'] = [
+      '#type' => 'link',
+      '#title' => t('Register'),
+      '#url' => \Drupal\Core\Url::fromRoute('user.register'),
+      '#attributes' => [
+        'class' => ['register-link'],
+      ],
+    ];
+
+    $form['forgot_password_link'] = [
+      '#type' => 'link',
+      '#title' => t('Forgot your password?'),
+      '#url' => \Drupal\Core\Url::fromRoute('user.pass'),
+      '#attributes' => [
+        'class' => ['forgot-password-link'],
+      ],
+    ];
+
+    $form['actions']['register_link'] = $form['register_link'];
+    $form['actions']['forgot_password_link'] = $form['forgot_password_link'];
+    unset($form['register_link'], $form['forgot_password_link']);
+  }
+
+  if ($form_id === 'user_register_form') {
+    $form['register_link'] = [
+      '#type' => 'link',
+      '#title' => t('Login'),
+      '#url' => \Drupal\Core\Url::fromRoute('user.login'),
+      '#attributes' => [
+        'class' => ['register-link'],
+      ],
+    ];
+
+    $form['actions']['register_link'] = $form['register_link'];
+    unset($form['register_link']);
+  }
+}

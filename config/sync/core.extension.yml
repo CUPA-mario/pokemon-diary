@@ -39,6 +39,7 @@ module:
   path_alias: 0
   pokeapi: 0
   pokehome: 0
+  pokecustomlink: 0
   registration_role: 0
   search: 0
   shortcut: 0
