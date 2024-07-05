@@ -3,6 +3,7 @@
 use Drupal\Component\Utility\Random;
 use Drupal\user\Entity\User;
 use Drupal\views\ViewExecutable;
+use Drupal\file\Entity\File;
 
 /**
  * Implements hook_views_pre_view().
@@ -124,45 +125,53 @@ function delete_terms_from_vocab($vid) {
  * Implements hook_entity_view().
  */
 function pokeapi_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
-  if ($entity->getEntityTypeId() === 'node' && $entity->hasField('field_location')) {
+  if ($entity->getEntityTypeId() === 'node') {
     // Perform custom logic for node view.
+    $results = [];
+    $types = [];
+    $name = $entity->get('title')->value ?? '';
+    $results = \Drupal::service('pokeapi.pokemon_service')->getPokemonByName($name);
 
-    if ($entity->hasField('field_photo')) {
-      $name = $entity->get('title')->value;
-      $image_url = $entity->get('field_photo')->value;
+    if ($entity->hasField('field_photo')) {      
+      $image_url = $entity->get('field_photo')->target_id ?? '';
+      $file = File::load($image_url);
 
-      if (empty($image_url)) {
-        $results = \Drupal::service('pokeapi.pokemon_service')->getPokemonByName($name);
-
-        if ($results) {
-          $image_url = $results['sprites']['other']['official-artwork']['front_default'];
+      if (empty($file)) {
+        $image_url = $results['sprites']['other']['official-artwork']['front_default'];
+        if ($results && $image_url) {
           $image = sprintf('<img src="%s" />', $image_url);
           $build['image'] = [
             '#markup' => '<div class="pokemon-image">'.$image.'</div>',
             '#weight' => 100,
           ];
-
-          $types = [];
-          foreach ($results['types'] as $type) {
-            $types[] = ucwords($type['type']['name']);
-          }
-          $build['type'] = [
-            '#markup' => '<div class="pokemon-type"><ul><li>'.implode('</li><li>', $types).'</li></ul></div>',
-            '#weight' => 200,
-          ];
         }
       }
     }
 
-    $created_timestamp = $entity->get('created')->value;
-    $date_created = \Drupal::service('date.formatter')->format($created_timestamp, 'custom', 'd/m/Y');
-    $build['date_captured'] = [
-      '#markup' => '<div class="pokemon-date-captured">'.$date_created.'</div>',
-      '#weight' => 300,
-    ];
+    if ($results && $results['types']) {
+      foreach ($results['types'] as $type) {
+        $types[] = ucwords($type['type']['name']);
+      }
+
+      $build['type'] = [
+        '#markup' => '<div class="pokemon-type"><ul><li>'.implode('</li><li>', $types).'</li></ul></div>',
+        '#weight' => 200,
+      ];
+    }
+
+    if ($entity->hasField('created')) {
+      $created_timestamp = $entity->get('created')->value;
+      $date_created = \Drupal::service('date.formatter')->format($created_timestamp, 'custom', 'd/m/Y');
+
+      $build['date_captured'] = [
+        '#markup' => '<div class="pokemon-date-captured">'.$date_created.'</div>',
+        '#weight' => 300,
+      ];
+    }
 
     if ($entity->hasField('field_location')) {
       $location = $entity->get('field_location')->value;
+
       $build['location'] = [
         '#markup' => '<div class="pokemon-location">'.$location.'</div>',
         '#weight' => 400,
