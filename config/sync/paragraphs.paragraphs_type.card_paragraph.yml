@@ -1,0 +1,10 @@
+uuid: 0aac0f95-0b48-43f7-a7dc-50180547e5fe
+langcode: en
+status: true
+dependencies: {  }
+id: card_paragraph
+label: 'Card Paragraph'
+icon_uuid: null
+icon_default: null
+description: 'This paragraphs type will contain fields for the card like the components in SiteStudio.'
+behavior_plugins: {  }
