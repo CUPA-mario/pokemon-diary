@@ -4,8 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.node.homepage.body
+    - field.field.node.homepage.field_paragraphs
     - node.type.homepage
   module:
+    - entity_reference_revisions
     - text
     - user
 id: node.homepage.default
@@ -19,6 +21,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 101
     region: content
   links:
     settings: {  }
