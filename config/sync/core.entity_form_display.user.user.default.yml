@@ -44,6 +44,7 @@ content:
     third_party_settings: {  }
 hidden:
   contact: true
+  field_friend_code: true
   language: true
   timezone: true
   user_picture: true

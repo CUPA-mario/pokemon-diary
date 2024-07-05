@@ -8,15 +8,25 @@ use Drupal\views\ViewExecutable;
  * Implements hook_views_pre_view().
  */
 function pokeapi_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
-  if ($view->id() == 'trainer_diary_view' && $display_id == 'page_1') {
-    /** Searches if friend code exists before querying the user id */
-    $query = \Drupal::entityQuery('user')
-      ->accessCheck(FALSE)
-      ->condition('field_friend_code', $args[0]);
-    $user_id = $query->execute();
-    $args[0] = $user_id ? key($user_id) : $args[0];
+  if ($view->id() == 'trainer_diary_view') {
+    $id = $args[0] ?? '';
+    // Check if friend code exists before querying the user id
+    try {
+      $query = \Drupal::entityQuery('user')
+        ->accessCheck(FALSE)
+        ->condition('field_friend_code', $id);
+      $user_ids = $query->execute();
+      // Use the first user ID if found
+      $user_id = reset($user_ids);
+    } catch (Exception $e) {
+      \Drupal::logger('pokeapi')->warning(
+        'Warning: This user has an empty field_friend_code. Error message: ' . $e->getMessage());
+    }
+    // Use current user ID if on page_2 display
+    $args[0] = ($display_id == 'page_2') ? \Drupal::currentUser()->id() : ($user_id ?: $id);
+    // Load the user based on the adjusted $args[0]
     $user = User::load($args[0]);
-    /** Set dynamic value for user header based on loaded user */
+    // Set dynamic value for user header based on loaded user
     $options = $view->display_handler->getOption('header');
     if ($options['entity_user']) {
       $options['entity_user']['target'] = $user->uuid();
