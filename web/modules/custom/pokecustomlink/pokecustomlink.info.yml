@@ -1,0 +1,7 @@
+name: 'Customized Links'
+type: module
+description: 'Adds a custom links for login and registration page.'
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - drupal:user
