@@ -11,7 +11,7 @@ _core:
 id: b5subtheme_powered_by_drupal
 theme: b5subtheme
 region: footer
-weight: 0
+weight: -9
 provider: null
 plugin: system_powered_by_block
 settings:
