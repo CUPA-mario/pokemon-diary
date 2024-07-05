@@ -5,6 +5,7 @@ use Drupal\Core\Render\Markup;
 use Drupal\user\Entity\User;
 use Drupal\views\ViewExecutable;
 use Drupal\file\Entity\File;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Implements hook_views_pre_view().
@@ -30,8 +31,24 @@ function pokeapi_views_pre_view(ViewExecutable $view, $display_id, array &$args)
     $user = User::load($args[0]);
     // Set dynamic value for user header based on loaded user
     $options = $view->display_handler->getOption('header');
-    if ($options['entity_user']) {
-      $options['entity_user']['target'] = $user->uuid();
+    try {
+      if (isset($options['entity_user']) && $options['entity_user']) {
+        if ($user !== null) {
+          $user_uuid = $user->uuid();
+          if ($user_uuid !== null) {
+            $options['entity_user']['target'] = $user_uuid;
+          } else {
+            // UUID is null, throw a NotFoundHttpException to trigger a 404 response
+            throw new NotFoundHttpException();
+          }
+        } else {
+          // User is null, throw a NotFoundHttpException to trigger a 404 response
+          throw new NotFoundHttpException();
+        }
+      }
+    } catch (Exception $e) {
+      // Redirect to 404 page
+      throw new NotFoundHttpException();
     }
     $view->display_handler->overrideOption('header', $options);
   }
@@ -143,7 +160,7 @@ function pokeapi_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface 
     $name = $entity->get('title')->value ?? '';
     $results = \Drupal::service('pokeapi.pokemon_service')->getPokemonByName($name);
 
-    if ($entity->hasField('field_photo')) {      
+    if ($entity->hasField('field_photo')) {
       $image_url = $entity->get('field_photo')->target_id ?? '';
       $file = File::load($image_url);
 
