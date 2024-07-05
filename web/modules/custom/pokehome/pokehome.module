@@ -52,8 +52,8 @@ function pokehome_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
             $file = File::load($field_image_url ?? '');
             if (empty($file)) {
-                $field_image_url = $results['sprites']['other']['official-artwork']['front_default'];
-                if (isset($field_image_url)) {
+                if (isset($results['sprites']['other']['official-artwork']['front_default'])) {
+                    $field_image_url = $results['sprites']['other']['official-artwork']['front_default'];
                     $file = File::load($field_image_url);
                     if (!$file) {
                         $file = File::create([
