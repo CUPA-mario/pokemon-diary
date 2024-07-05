@@ -13,3 +13,115 @@ footer[role="contentinfo"] {
 footer.bg-secondary span, footer.bg-secondary a {
   color: #333333;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+
+body.login * {
+  font-family: "Nunito Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  color: #595959;
+}
+body.login h1,
+body.register h1,
+body.reset-password h1 {
+  font-family: "Fredoka", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  color: #333333;
+}
+/* Login page */
+body.login header,
+body.login footer,
+body.login main > div.container > div.region-breadcrumb,
+body.login main > div.container nav.tabs {
+  display: none;
+}
+
+body.register header,
+body.register footer,
+body.register main > div.container > div.region-breadcrumb,
+body.register main > div.container nav.tabs {
+  display: none;
+}
+
+body.reset-password header,
+body.reset-password footer,
+body.reset-password main > div.container > div.region-breadcrumb,
+body.reset-password main > div.container nav.tabs {
+  display: none;
+}
+
+
+body.login main > div.container,
+body.register main > div.container,
+body.reset-password main > div.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 417px;
+  margin: auto;
+}
+body.register main > div.container {
+  max-width: 720px;
+}
+
+body.login main > div.container div.region.region-content,
+body.register main > div.container div.region.region-content,
+body.reset-password main > div.container div.region.region-content { 
+  background-color: white;
+  border-radius: 6px;
+  padding: 28px 20px;
+}
+
+img.pokediary-logo {
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
+}
+
+body.login main {
+  display: flex;
+  height: 100%;
+  background-image: url('../images/login-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.register main {
+  display: flex;
+  height: 100%;
+  background-image: url('../images/register-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.reset-password main {
+  display: flex;
+  height: 100%;
+  background-image: url('../images/reset-password-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+
+body.login main div.form-actions.js-form-wrapper,
+body.register main div.form-actions.js-form-wrapper,
+body.reset-password main div.form-actions.js-form-wrapper {
+  display: flex;
+  margin-bottom: unset;
+}
+
+body.login main div.form-actions.js-form-wrapper input[type="submit"],
+body.register main div.form-actions.js-form-wrapper input[type="submit"],
+body.reset-password main div.form-actions.js-form-wrapper input[type="submit"]{
+  margin-left: auto;
+  background-image: linear-gradient(to right, #E3350D, #9C2208);
+  color: white;
+  font-weight: 500;
+  border-color: unset;
+}
