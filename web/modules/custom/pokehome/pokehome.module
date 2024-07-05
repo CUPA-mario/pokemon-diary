@@ -1,9 +1,12 @@
 <?php
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\views\ViewExecutable;
+use Drupal\file\Entity\File;
 
 /**
  * Implements hook_form_alter().
  */
-function pokehome_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function pokehome_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     // Check if the content type is 'testimonial'. Adjust this to match your content type machine name.
     if ($form_id == 'node_testimonials_form') {
         $user = \Drupal::currentUser();
@@ -15,6 +18,62 @@ function pokehome_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_
             $form['field_trainer_name']['widget'][0]['value']['#attributes']['disabled'] = 'disabled';
         } else {
             Drupal::logger('testimonial_autopopulate')->warning('field_trainer_name not found.');
+        }
+    }
+}
+
+
+/**
+ * Implements hook_pre_render().
+ */
+ function pokehome_views_pre_render(ViewExecutable $view) {
+    // Check for the specific view and display.
+    if ($view->id() == 'recent_pokemon_capture' && $view->current_display == 'block_1') {
+
+        foreach ($view->result as $row) {
+            $field_pokemon_name = $row->_entity->get('title')->value ?? '';
+            $field_image_url = $row->_entity->get('field_photo')->target_id ?? '';
+
+            $results = \Drupal::service('pokeapi.pokemon_service')->getPokemonByName($field_pokemon_name) ?? [];
+
+            $types = [];
+            if (isset($results) && isset($results['types'])) {
+                foreach ($results['types'] as $type) {
+                    $types[] = ucwords($type['type']['name']);
+                }
+            }
+
+            if (count($types) > 0) {
+                $combined_types = implode(', ', $types);
+                if ($row->_entity->hasField('field_types')) {
+                    $row->_entity->set('field_types', $combined_types);
+                }
+            }
+
+            $file = File::load($field_image_url ?? '');
+            if (empty($file)) {
+                $field_image_url = $results['sprites']['other']['official-artwork']['front_default'];
+                if (isset($field_image_url)) {
+                    $file = File::load($field_image_url);
+                    if (!$file) {
+                        $file = File::create([
+                            'uri' => $field_image_url,
+                            'status' => 1,
+                        ]);
+                        $file->save();
+                    }
+
+                    if ($row->_entity->hasField('field_photo')) {
+                        $row->_entity->set('field_photo', [
+                            'target_id' => $file->id(),
+                            'alt' => 'Pokemon Image',
+                            'title' => 'Pokemon Image',
+                        ]);
+                    }  
+                }
+            }
+
+            $row->_entity->save();
         }
     }
 }
