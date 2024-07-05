@@ -371,7 +371,21 @@ display:
         type: tag
         options: {  }
       empty: {  }
-      sorts: {  }
+      sorts:
+        field_date_captured_value:
+          id: field_date_captured_value
+          table: node__field_date_captured
+          field: field_date_captured_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: day
       arguments: {  }
       filters:
         status:

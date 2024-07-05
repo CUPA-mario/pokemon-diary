@@ -47,6 +47,7 @@ function pokehome_form_alter(&$form, FormStateInterface $form_state, $form_id) {
                 $combined_types = implode(', ', $types);
                 if ($row->_entity->hasField('field_types')) {
                     $row->_entity->set('field_types', $combined_types);
+                    $row->_entity->save();
                 }
             }
 
@@ -73,7 +74,7 @@ function pokehome_form_alter(&$form, FormStateInterface $form_state, $form_id) {
                 }
             }
 
-            $row->_entity->save();
+            
         }
     }
 }
