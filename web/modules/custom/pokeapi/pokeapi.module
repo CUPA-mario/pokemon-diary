@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Component\Utility\Random;
+use Drupal\Core\Render\Markup;
 use Drupal\user\Entity\User;
 use Drupal\views\ViewExecutable;
 use Drupal\file\Entity\File;
@@ -125,6 +126,16 @@ function delete_terms_from_vocab($vid) {
  * Implements hook_entity_view().
  */
 function pokeapi_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+  if ($entity->getEntityTypeId() === 'user') {
+    $base_url = \Drupal::request()->getSchemeAndHttpHost();
+    $friend_code = $entity->get('field_friend_code')->value;
+    $share_url = sprintf('%s/diary/%s', $base_url, $friend_code);
+    $share_links = custom_share_links_generate($share_url);
+    $build['field_friend_code_alt'] = [
+      '#markup' => Markup::create($share_links),
+      '#weight' => 200,
+    ];
+  }
   if ($entity->getEntityTypeId() === 'node') {
     // Perform custom logic for node view.
     $results = [];
@@ -178,6 +189,29 @@ function pokeapi_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface 
       ];
     }
   }
+}
+
+/**
+ * Generates social media share links.
+ *
+ * @param string $url
+ *   The URL to share.
+ *
+ * @return string
+ *   The HTML markup for the share links.
+ */
+function custom_share_links_generate($url) {
+  $facebook_share = 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($url);
+  $twitter_share = 'https://twitter.com/intent/tweet?url=' . urlencode($url);
+  $linkedin_share = 'https://www.linkedin.com/shareArticle?mini=true&url=' . urlencode($url);
+
+  $links = '<ul class="share-links">';
+  $links .= '<li><a href="' . $facebook_share . '" target="_blank" class="share-link share-link-facebook" onclick="window.open(this.href, \'mywin\', \'left=20,top=20,width=500,height=500,toolbar=1,resizable=0\'); return false;">Share on Facebook</a></li>';
+  $links .= '<li><a href="' . $twitter_share . '" target="_blank" class="share-link share-link-twitter" onclick="window.open(this.href, \'mywin\', \'left=20,top=20,width=500,height=500,toolbar=1,resizable=0\'); return false;">Share on Twitter</a></li>';
+  $links .= '<li><a href="' . $linkedin_share . '" target="_blank" class="share-link share-link-linkedin" onclick="window.open(this.href, \'mywin\', \'left=20,top=20,width=500,height=500,toolbar=1,resizable=0\'); return false;">Share on LinkedIn</a></li>';
+  $links .= '</ul>';
+
+  return $links;
 }
 
 /**
