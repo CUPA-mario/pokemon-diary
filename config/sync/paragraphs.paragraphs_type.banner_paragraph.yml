@@ -1,0 +1,10 @@
+uuid: 8020a9ad-007d-4cff-bda4-583b76c87b54
+langcode: en
+status: true
+dependencies: {  }
+id: banner_paragraph
+label: 'Banner Paragraph'
+icon_uuid: null
+icon_default: null
+description: 'This paragraphs type will contain fields for the banner like the components in SiteStudio.'
+behavior_plugins: {  }
