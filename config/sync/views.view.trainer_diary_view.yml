@@ -536,7 +536,7 @@ display:
           plugin_id: entity
           empty: false
           target: ''
-          view_mode: default
+          view_mode: trainer_diary
           tokenize: true
           bypass_access: false
       footer: {  }
