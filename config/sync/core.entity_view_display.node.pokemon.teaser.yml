@@ -7,8 +7,10 @@ dependencies:
     - field.field.node.pokemon.field_date_captured
     - field.field.node.pokemon.field_location
     - field.field.node.pokemon.field_photo
+    - field.field.node.pokemon.field_types
     - node.type.pokemon
   module:
+    - datetime
     - image
     - user
 id: node.pokemon.teaser
@@ -16,9 +18,26 @@ targetEntityType: node
 bundle: pokemon
 mode: teaser
 content:
+  field_date_captured:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_location:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
   field_photo:
     type: image
-    label: above
+    label: hidden
     settings:
       image_link: ''
       image_style: ''
@@ -28,6 +47,5 @@ content:
     weight: 0
     region: content
 hidden:
-  field_date_captured: true
-  field_location: true
+  field_types: true
   links: true

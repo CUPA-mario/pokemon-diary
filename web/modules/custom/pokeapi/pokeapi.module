@@ -2,6 +2,7 @@
 
 use Drupal\Component\Utility\Random;
 use Drupal\Core\Render\Markup;
+use Drupal\pokeapi\Helper\PokemonHelper;
 use Drupal\user\Entity\User;
 use Drupal\views\ViewExecutable;
 use Drupal\file\Entity\File;
@@ -13,18 +14,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 function pokeapi_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
   if ($view->id() == 'trainer_diary_view') {
     $id = $args[0] ?? '';
-    // Check if friend code exists before querying the user id
-    try {
-      $query = \Drupal::entityQuery('user')
-        ->accessCheck(FALSE)
-        ->condition('field_friend_code', $id);
-      $user_ids = $query->execute();
-      // Use the first user ID if found
-      $user_id = reset($user_ids);
-    } catch (Exception $e) {
-      \Drupal::logger('pokeapi')->warning(
-        'Warning: This user has an empty field_friend_code. Error message: ' . $e->getMessage());
-    }
+    $user_id = getUser('field_friend_code', $id);
     // Use current user ID if on page_2 display
     $args[0] = ($display_id == 'page_2') ? \Drupal::currentUser()->id() : ($user_id ?: $id);
     // Load the user based on the adjusted $args[0]
@@ -54,6 +44,31 @@ function pokeapi_views_pre_view(ViewExecutable $view, $display_id, array &$args)
   }
 }
 
+function pokeapi_views_pre_render(ViewExecutable $view) {
+  if ($view->id() == 'trainer_diary_view') {
+    $args = [];
+    foreach ($view->result as $row) {
+      $args['pokemon_name'] = $row->_entity->get('title')->value ?? '';
+      $args['pokemon_image'] = $row->_entity->get('field_photo')->target_id ?? '';
+      $image_default = PokemonHelper::getDefaultSprite($args);
+      $pokemon_type = PokemonHelper::getType( $args['pokemon_name']);
+      if ($row->_entity->hasField('field_photo') && !is_null($image_default)) {
+        $row->_entity->set('field_photo', [
+          'target_id' => $image_default->id() ?? null,
+          'alt' => 'Pokemon Image',
+          'title' => 'Pokemon Image',
+        ]);
+      }
+      if ($row->_entity->hasField('field_types')) {
+        if (empty($row->_entity->get('field_types'))) {
+          $row->_entity->set('field_types', $pokemon_type);
+          $row->_entity->save();
+        }
+      }
+    }
+  }
+}
+
 /**
  * Implements hook_form_alter().
  */
@@ -72,6 +87,12 @@ function pokeapi_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_s
     if (isset($form['actions']['submit']['#value'])) {
       // Change the text of the save button.
       $form['actions']['submit']['#value'] = t('Add entry');
+    }
+  }
+  if ($form_id === 'user_form') {
+    if (isset($form['actions']['submit']['#value'])) {
+      // Change the text of the save button.
+      $form['#validate'][] = 'pokeapi_custom_user_validate';
     }
   }
 }
@@ -232,6 +253,18 @@ function custom_share_links_generate($url) {
 }
 
 /**
+ * Custom form validation function for user.
+ */
+function pokeapi_custom_user_validate($form, &$form_state) {
+  $value = $form_state->getValue('field_friend_code');
+  $current_user = \Drupal::currentUser()->id();
+  $user_id = getUser('field_friend_code', $value);
+  if ($user_id && ($user_id != $current_user)) {
+    $form_state->setErrorByName('field_friend_code', 'Error: a user has already set the same friend code');
+  }
+}
+
+/**
  * Implements hook_preprocess_HOOK() for block templates.
  */
 function pokeapi_preprocess_block(&$variables) {
@@ -241,4 +274,22 @@ function pokeapi_preprocess_block(&$variables) {
       '@year' => date('Y')
       ]);
   }
+}
+
+/**
+ * Fetch user with declared field & value
+ */
+function getUser($field_name, $value) {
+  try {
+    $query = \Drupal::entityQuery('user')
+      ->accessCheck(FALSE)
+      ->condition($field_name, $value);
+    $user_ids = $query->execute();
+    // Use the first user ID if found
+    $user_id = reset($user_ids);
+  } catch (Exception $e) {
+    \Drupal::logger('pokeapi')->warning(
+      'Warning: This user has an empty ' . $field_name .'. Error message: ' . $e->getMessage());
+  }
+  return $user_id;
 }

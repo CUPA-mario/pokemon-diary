@@ -1,36 +1,27 @@
-uuid: 505eab2d-9d28-4dc2-bedc-ac85d38a6d2b
+uuid: 4b0f44db-68e2-4abd-abfb-54fa479b8f31
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.user.register
     - field.field.user.user.field_friend_code
     - field.field.user.user.field_terms_and_policy
     - field.field.user.user.field_trainer_name
     - field.field.user.user.user_picture
-    - image.style.thumbnail
   module:
-    - image
     - path
     - user
 _core:
   default_config_hash: FaQ9Ptcpxpg30AtiqRDtl_8zbJArHP1LPfug_s59TOA
-id: user.user.default
+id: user.user.register
 targetEntityType: user
 bundle: user
-mode: default
+mode: register
 content:
   account:
     weight: 0
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_friend_code:
-    type: string_textfield
-    weight: 0
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   field_terms_and_policy:
     type: boolean_checkbox
@@ -58,15 +49,9 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  user_picture:
-    type: image_image
-    weight: 0
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
 hidden:
   contact: true
+  field_friend_code: true
   language: true
   timezone: true
+  user_picture: true

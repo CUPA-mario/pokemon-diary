@@ -1,0 +1,11 @@
+uuid: e98b3b4a-a96a-4efd-b1fd-9c16b59c7497
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: user.account_settings
+label: 'Account Settings'
+description: 'This the forms user will see when in user settings'
+targetEntityType: user
+cache: true
