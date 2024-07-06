@@ -7,9 +7,9 @@ use Drupal\file\Entity\File;
 class PokemonHelper {
   public static function getDefaultSprite($args) {
     $results = \Drupal::service('pokeapi.pokemon_service')->getPokemonByName($args['pokemon_name']) ?? [];
+    $sprite = $results['sprites']['other']['official-artwork']['front_default'];
     $file = File::load($args['pokemon_image'] ?? '');
-    if (empty($file)) {
-      $sprite = $results['sprites']['other']['official-artwork']['front_default'];
+    if (empty($file) && !empty($sprite)) {
       if ($sprite) {
         $args['pokemon_image'] = $sprite;
         $file = File::load($args['pokemon_image']);

@@ -52,7 +52,7 @@ function pokeapi_views_pre_render(ViewExecutable $view) {
       $args['pokemon_image'] = $row->_entity->get('field_photo')->target_id ?? '';
       $image_default = PokemonHelper::getDefaultSprite($args);
       $pokemon_type = PokemonHelper::getType( $args['pokemon_name']);
-      if ($row->_entity->hasField('field_photo')) {
+      if ($row->_entity->hasField('field_photo') && !is_null($image_default)) {
         $row->_entity->set('field_photo', [
           'target_id' => $image_default->id() ?? null,
           'alt' => 'Pokemon Image',
