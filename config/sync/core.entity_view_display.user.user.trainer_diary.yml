@@ -8,7 +8,9 @@ dependencies:
     - field.field.user.user.field_terms_and_policy
     - field.field.user.user.field_trainer_name
     - field.field.user.user.user_picture
+    - image.style.thumbnail
   module:
+    - image
     - user
 _core:
   default_config_hash: mZLyuWM9CQx2ZJVqFGSbzgFnHzudVbHBYmdU256A5Wk
@@ -23,7 +25,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
   field_trainer_name:
     type: string
@@ -31,9 +33,19 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 0
+    weight: 2
+    region: content
+  user_picture:
+    type: image
+    label: inline
+    settings:
+      image_link: ''
+      image_style: thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   field_terms_and_policy: true
   member_for: true
-  user_picture: true

@@ -30,4 +30,5 @@ content:
 hidden:
   field_date_captured: true
   field_location: true
+  field_types: true
   links: true

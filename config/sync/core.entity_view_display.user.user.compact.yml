@@ -38,5 +38,6 @@ content:
     weight: 0
     region: content
 hidden:
+  field_friend_code: true
   field_terms_and_policy: true
   member_for: true

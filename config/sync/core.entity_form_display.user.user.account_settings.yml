@@ -1,8 +1,9 @@
-uuid: 505eab2d-9d28-4dc2-bedc-ac85d38a6d2b
+uuid: fec8c2dc-f42d-4ce9-9f92-8747149686e9
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.user.account_settings
     - field.field.user.user.field_friend_code
     - field.field.user.user.field_terms_and_policy
     - field.field.user.user.field_trainer_name
@@ -14,10 +15,10 @@ dependencies:
     - user
 _core:
   default_config_hash: FaQ9Ptcpxpg30AtiqRDtl_8zbJArHP1LPfug_s59TOA
-id: user.user.default
+id: user.user.account_settings
 targetEntityType: user
 bundle: user
-mode: default
+mode: account_settings
 content:
   account:
     weight: 0
