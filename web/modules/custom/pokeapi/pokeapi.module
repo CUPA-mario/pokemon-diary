@@ -2,6 +2,7 @@
 
 use Drupal\Component\Utility\Random;
 use Drupal\Core\Render\Markup;
+use Drupal\pokeapi\Helper\PokemonHelper;
 use Drupal\user\Entity\User;
 use Drupal\views\ViewExecutable;
 use Drupal\file\Entity\File;
@@ -40,6 +41,31 @@ function pokeapi_views_pre_view(ViewExecutable $view, $display_id, array &$args)
       throw new NotFoundHttpException();
     }
     $view->display_handler->overrideOption('header', $options);
+  }
+}
+
+function pokeapi_views_pre_render(ViewExecutable $view) {
+  if ($view->id() == 'trainer_diary_view') {
+    $args = [];
+    foreach ($view->result as $row) {
+      $args['pokemon_name'] = $row->_entity->get('title')->value ?? '';
+      $args['pokemon_image'] = $row->_entity->get('field_photo')->target_id ?? '';
+      $image_default = PokemonHelper::getDefaultSprite($args);
+      $pokemon_type = PokemonHelper::getType( $args['pokemon_name']);
+      if ($row->_entity->hasField('field_photo')) {
+        $row->_entity->set('field_photo', [
+          'target_id' => $image_default->id(),
+          'alt' => 'Pokemon Image',
+          'title' => 'Pokemon Image',
+        ]);
+      }
+      if ($row->_entity->hasField('field_types')) {
+        if (empty($row->_entity->get('field_types'))) {
+          $row->_entity->set('field_types', $pokemon_type);
+          $row->_entity->save();
+        }
+      }
+    }
   }
 }
 

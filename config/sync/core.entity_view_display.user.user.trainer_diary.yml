@@ -37,7 +37,7 @@ content:
     region: content
   user_picture:
     type: image
-    label: inline
+    label: hidden
     settings:
       image_link: ''
       image_style: thumbnail
