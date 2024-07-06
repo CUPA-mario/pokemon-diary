@@ -54,7 +54,7 @@ function pokeapi_views_pre_render(ViewExecutable $view) {
       $pokemon_type = PokemonHelper::getType( $args['pokemon_name']);
       if ($row->_entity->hasField('field_photo')) {
         $row->_entity->set('field_photo', [
-          'target_id' => $image_default->id(),
+          'target_id' => $image_default->id() ?? null,
           'alt' => 'Pokemon Image',
           'title' => 'Pokemon Image',
         ]);
