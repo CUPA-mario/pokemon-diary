@@ -729,7 +729,7 @@ display:
           target: ''
           view_mode: trainer_diary
           tokenize: true
-          bypass_access: false
+          bypass_access: true
       footer: {  }
       display_extenders: {  }
     cache_metadata:
