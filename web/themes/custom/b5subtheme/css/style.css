@@ -17,21 +17,25 @@ footer.bg-secondary span, footer.bg-secondary a {
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
 
-body.login * {
+body * { /* Change default font of all element to Nunito sans */
   font-family: "Nunito Sans", sans-serif;
   font-style: normal;
   font-weight: 400;
   color: #595959;
 }
-body.login h1,
-body.register h1,
-body.reset-password h1 {
+
+h1, h2, h3, h4, h5, h6 { /* Change all headings' font to fredoka */
   font-family: "Fredoka", sans-serif;
   font-style: normal;
   font-weight: 600;
   color: #333333;
 }
-/* Login page */
+
+body main > div.container > div.region-breadcrumb { /* Hide breadcrumb for all pages */
+  display: none;
+}
+
+/* Non-authenticated pages */
 body.login header,
 body.login footer,
 body.login main > div.container > div.region-breadcrumb,
@@ -124,4 +128,109 @@ body.reset-password main div.form-actions.js-form-wrapper input[type="submit"]{
   color: white;
   font-weight: 500;
   border-color: unset;
+}
+
+/* Diary list personal - header */
+.diary-list-personal .view-header {
+  background-color: #FDF5E6;
+  padding: 32px;
+}
+.diary-list-personal .view-header article {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+.diary-list-personal .view-header article div.field--name-field-trainer-name .field__label {
+  font-weight: normal;
+  font-size: 14px;
+}
+.diary-list-personal .view-header article div.field--name-field-trainer-name .field__item {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  color: #333333;
+}
+
+.diary-list-personal .view-header article div.field--name-field-friend-code {
+  margin-left: auto;
+  margin-right: 12px;
+}
+.diary-list-personal .view-header article div.field--name-field-friend-code .field__label {
+  font-weight: normal;
+}
+.diary-list-personal .view-header article div.field--name-field-friend-code .field__item {
+  font-weight: bold;
+  font-size: 28px;
+  color: #333333;
+}
+
+
+/* Diary list personal - pokemon list*/
+.diary-list-personal .view-content {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+.diary-list-personal .view-content .views-row {
+  display: table-row;
+}
+.diary-list-personal .view-content .views-row:nth-child(odd) {
+  background-color: #E5F8FB;
+}
+.diary-list-personal .view-content .views-row:nth-child(even) {
+  background-color: #E4F3E0;  
+}
+.diary-list-personal .view-content .views-row .views-field {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+.diary-list-personal .view-content .views-row .views-field span {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  color: #333333;
+}
+.diary-list-personal .view-content .views-row .views-field.views-field-title a {
+  font-family: "Fredoka", sans-serif;
+  font-size: 24px;
+  color: #333333;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.diary-list-personal .view-content .views-row:hover .views-field.views-field-title a {
+  color: transparent;
+  background-image: linear-gradient(to right, #E3350D, #9C2208);
+  -webkit-background-clip: text;
+  transition: background-image 200ms linear;
+}
+
+.diary-list-personal .view-content .views-row .views-field.views-field-title a:hover {
+  border: 0;
+  border-bottom: solid 2px ;
+  border-image: linear-gradient(to right, #E3350D, #9C2208) 1;
+}
+
+.diary-list-personal .view-content .views-row .views-field.views-field-field-photo > .field-content img.img-fluid {
+  width: 100%;
+  max-width: 160px;
+}
+
+
+
+/* Footer */
+footer div.region.region-footer {
+  flex-direction: row;
+  align-items: flex-start;
+}
+footer div.region.region-footer nav {
+  margin-left: 20px;
+}
+footer div.region.region-footer nav ul.nav.navbar-nav {
+  display: flex;
+  flex-direction: row;
+}
+footer div.region.region-footer nav ul.nav.navbar-nav li a {
+  padding: 0 12px;
 }
