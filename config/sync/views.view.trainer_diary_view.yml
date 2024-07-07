@@ -407,19 +407,13 @@ display:
                   collapsible: false
                   collapsible_disable_automatic_open: false
                   is_secondary: false
-              field_types_value:
-                plugin_id: bef
+              delta:
+                plugin_id: default
                 advanced:
-                  placeholder_text: type
-                  rewrite:
-                    filter_rewrite_values: ''
-                    filter_rewrite_values_key: false
-                  collapsible: true
+                  placeholder_text: ''
+                  collapsible: false
                   collapsible_disable_automatic_open: false
                   is_secondary: false
-                select_all_none: false
-                select_all_none_nested: false
-                display_inline: false
       access:
         type: none
         options: {  }
@@ -498,52 +492,6 @@ display:
           group: 1
           expose:
             operator: ''
-        combine:
-          id: combine
-          table: views
-          field: combine
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: combine
-          operator: '='
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: combine_op
-            label: 'Combine fields filter'
-            description: ''
-            use_operator: false
-            operator: combine_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: combine
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              content_editor: '0'
-              administrator: '0'
-              trainer: '0'
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          fields:
-            title: title
-            field_location: field_location
         type:
           id: type
           table: node_field_data
@@ -590,6 +538,52 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: ''
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              trainer: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            field_location: field_location
         field_date_captured_value:
           id: field_date_captured_value
           table: node__field_date_captured
@@ -608,7 +602,7 @@ display:
           exposed: true
           expose:
             operator_id: field_date_captured_value_op
-            label: 'Date captured (field_date_captured)'
+            label: ''
             description: ''
             use_operator: false
             operator: field_date_captured_value_op
@@ -639,6 +633,61 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_types_value:
+          id: field_types_value
+          table: node__field_types
+          field: field_types_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_types_value_op
+            label: ''
+            description: ''
+            use_operator: false
+            operator: field_types_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_types_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              trainer: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: 'Types (field_types)'
+            description: ''
+            identifier: field_types_value
+            optional: true
+            widget: select
+            multiple: true
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: '- Any -'
+                operator: word
+                value: All
+              2:
+                title: ''
+                operator: word
+                value: ''
+              3:
+                title: ''
+                operator: word
+                value: ''
       filter_groups:
         operator: AND
         groups:
@@ -702,9 +751,221 @@ display:
     display_plugin: page
     position: 1
     display_options:
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          operator: in
+          value:
+            pokemon: pokemon
+          group: 1
+          exposed: false
+          expose:
+            operator_id: type_op
+            label: 'Content type'
+            description: ''
+            use_operator: false
+            operator: type_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: type
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              trainer: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: ''
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              trainer: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            title: title
+            field_location: field_location
+        field_date_captured_value:
+          id: field_date_captured_value
+          table: node__field_date_captured
+          field: field_date_captured_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_date_captured_value_op
+            label: ''
+            description: ''
+            use_operator: false
+            operator: field_date_captured_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_date_captured_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              trainer: '0'
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_types_value:
+          id: field_types_value
+          table: node__field_types
+          field: field_types_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_types_value_op
+            label: ''
+            description: ''
+            use_operator: false
+            operator: field_types_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_types_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              trainer: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: 'Types (field_types)'
+            description: ''
+            identifier: field_types_value
+            optional: true
+            widget: select
+            multiple: true
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: '- Any -'
+                operator: word
+                value: All
+              2:
+                title: ''
+                operator: word
+                value: ''
+              3:
+                title: ''
+                operator: word
+                value: ''
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       defaults:
-        filters: true
-        filter_groups: true
+        filters: false
+        filter_groups: false
       display_description: ''
       display_extenders: {  }
       path: diary/%code
@@ -894,6 +1155,49 @@ display:
             min_placeholder: ''
             max_placeholder: ''
             placeholder: 'Date Captured'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_types_value:
+          id: field_types_value
+          table: node__field_types
+          field: field_types_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_types_value_op
+            label: ''
+            description: ''
+            use_operator: false
+            operator: field_types_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_types_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              trainer: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''

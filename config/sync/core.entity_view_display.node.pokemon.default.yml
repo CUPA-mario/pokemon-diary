@@ -45,10 +45,17 @@ content:
     third_party_settings: {  }
     weight: 105
     region: content
+  field_types:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }
     weight: 0
     region: content
-hidden:
-  field_types: true
+hidden: {  }
