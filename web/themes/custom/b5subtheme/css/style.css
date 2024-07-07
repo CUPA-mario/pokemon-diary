@@ -304,3 +304,47 @@ div#block-b5subtheme-views-block-recent-pokemon-capture-block-1 h2 {
   text-decoration: none;
 }
 
+/* Testimonials - home page */ 
+
+body.page-node-type-testimonials main div.container div.region-content,
+.container-testimonials .item-testimony.views-row {
+  max-width: 712px;
+  margin-bottom: 20px;
+  border: 1px solid #EDEDED;
+  border-radius: 12px;
+
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+body.page-node-type-testimonials main div.container div.region-content {
+  margin-top: 32px;
+  margin-bottom: unset;
+}
+body.page-node-type-testimonials main div.container div.region-content article .field {
+  margin: 12px auto;
+}
+body.page-node-type-testimonials main div.container div.region-content div h1,
+body.page-node-type-testimonials main div.container div.region-content article .field__label {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+}
+.container-testimonials .item-testimony.views-row .views-field-title .field-content a {
+  font-family: "Fredoka", sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.container-testimonials .item-testimony.views-row .views-field-field-trainer-name .field-content {
+  margin-top: 12px;
+  text-align: center;
+  color: #CCCCCC;
+}
+.container-testimonials .item-testimony.views-row .views-field-field-trainer-name .field-content::before {
+  content: '-';
+}
+
+/* Pokemon page - individual view */
+body.page-node-type-pokemon main div.region.region-content {
+
+}
