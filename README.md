@@ -57,6 +57,7 @@ To create a visually appealing, shareable Pokémon diary, allowing a user to reg
         - run `ddev restart`
         - run `ddev pull platform --skip-files --skip-confirmation --skip-import -y`
         *this command fetches the latest database changes without importing files, confirming prompts, or requiring user input.
+        - run `ddev import-db --file=.ddev/.downloads/db.sql.gz`
         - run `ddev drush deploy`
 
     - Pushing local database changes to Platform.sh
