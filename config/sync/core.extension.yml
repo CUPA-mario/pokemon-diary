@@ -14,7 +14,6 @@ module:
   config: 0
   contact: 0
   contextual: 0
-  custom_datalayer_event: 0
   datetime: 0
   dblog: 0
   dynamic_page_cache: 0
@@ -25,8 +24,6 @@ module:
   file: 0
   filter: 0
   google_analytics: 0
-  gtm: 0
-  gtmdatalayer: 0
   help: 0
   history: 0
   image: 0
@@ -41,6 +38,7 @@ module:
   path: 0
   path_alias: 0
   pokeapi: 0
+  pokecustomlink: 0
   pokehome: 0
   registration_role: 0
   search: 0
