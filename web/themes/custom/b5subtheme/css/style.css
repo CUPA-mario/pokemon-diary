@@ -77,6 +77,9 @@ body.reset-password main > div.container div.region.region-content {
   border-radius: 6px;
   padding: 28px 20px;
 }
+body.register main > div.container div.region.region-content {
+  background-color:rgba(255,255,255, .95);
+}
 
 img.pokediary-logo {
   margin-right: auto;
@@ -91,6 +94,9 @@ body.login main {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-y: auto;
+  padding: 42px 0;
 }
 
 body.register main {
@@ -98,8 +104,11 @@ body.register main {
   height: 100%;
   background-image: url('../images/register-bg.png');
   background-size: cover;
-  background-position: center;
+  background-position: bottom center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-y: auto;
+  padding: 42px 0;
 }
 
 body.reset-password main {
@@ -109,8 +118,38 @@ body.reset-password main {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-y: auto;
+  padding: 42px 0;
 }
 
+
+body.register main > div.container div.region.region-content form div.form-wrapper#edit-account {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0 16px;
+}
+body.register main > div.container div.region.region-content form div.form-wrapper#edit-account > div:not(#edit-pass) {
+  flex: 1;
+  margin-bottom: unset;
+}
+body.register main > div.container div.region.region-content form div.form-wrapper#edit-account > div#edit-pass {
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0 16px;
+}
+
+body.register main > div.container div.region.region-content form div.form-wrapper#edit-account > div#edit-pass div.js-form-type-password {
+  flex: 1 1 25%;
+  overflow: unset;
+}
+body.register main > div.container div.region.region-content form div.form-wrapper#edit-account > div#edit-pass div.password-suggestions,
+body.register main > div.container div.region.region-content form div.form-wrapper#edit-account > div#edit-pass div.description {
+  flex: 1 1 100%;
+}
 
 
 body.login main div.form-actions.js-form-wrapper,
@@ -128,6 +167,26 @@ body.reset-password main div.form-actions.js-form-wrapper input[type="submit"]{
   color: white;
   font-weight: 500;
   border-color: unset;
+}
+
+body.login main div.form-actions.js-form-wrapper {
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
+body.login main div.form-actions.js-form-wrapper input[type="submit"] {
+  order: 3;
+  margin-top: 12px;
+}
+body.login .register-link {
+  flex: 1 1 50%;
+  order: 2;
+  text-decoration: none;
+}
+body.login .forgot-password-link {
+  flex: 1 1 50%;
+  order: 1;
+  color: #E3350D;
+  text-decoration: none;
 }
 
 /* Diary list personal - header */
