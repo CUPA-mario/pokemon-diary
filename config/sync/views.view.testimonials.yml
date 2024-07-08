@@ -277,6 +277,10 @@ display:
             testimonials: testimonials
       style:
         type: default
+        options:
+          grouping: {  }
+          row_class: item-testimony
+          default_row_class: true
       row:
         type: fields
       query:
@@ -288,6 +292,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
+      css_class: container-testimonials
       header: {  }
       footer: {  }
       display_extenders: {  }
