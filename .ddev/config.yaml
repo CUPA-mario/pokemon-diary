@@ -12,9 +12,9 @@ database:
 use_dns_when_possible: true
 composer_version: "2"
 web_environment:
-    - PLATFORMSH_CLI_TOKEN=QQI5WoE5C30UqX0Ps3UCZ87L1NYEsfmaK7iVqQLVIfI
-    - PLATFORM_ENVIRONMENT=develop
-    - PLATFORM_PROJECT=7vmrylydihhra
+    - PLATFORMSH_CLI_TOKEN=${PLATFORMSH_CLI_TOKEN}
+    - PLATFORM_ENVIRONMENT=${PLATFORM_ENVIRONMENT}
+    - PLATFORM_PROJECT=${PLATFORM_PROJECT}
 # Key features of DDEV's config.yaml:
 
 # name: <projectname> # Name of the project, automatically provides

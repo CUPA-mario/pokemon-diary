@@ -54,6 +54,7 @@ To create a visually appealing, shareable Pokémon diary, allowing a user to reg
         - Before working on your feature branch, ensure your local database is synced with the latest database from Platform.sh:
         - run `git checkout develop`
         - run `git pull origin develop`
+        - check if the variables appear using this command `env | grep PLATFORM` if not then ask the devs for the command for exporting this
         - run `ddev restart`
         - run `ddev pull platform --skip-files --skip-confirmation --skip-import -y`
         *this command fetches the latest database changes without importing files, confirming prompts, or requiring user input.
