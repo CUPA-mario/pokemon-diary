@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * Implements hook_help().
+ */
+function custom_datalayer_event_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.custom_datalayer_event':
+      return '<p>' . t('Custom DataLayer Event module pushes DataLayer event when user redirects to another page.') . '</p>';
+  }
+}
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function custom_datalayer_event_library_info_alter(array &$libraries, $extension) {
+  if ($extension === 'custom_datalayer_event') {
+    $libraries['custom_datalayer_event']['js'] = [
+      'js/custom_datalayer_event.js' => [],
+    ];
+  }
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function custom_datalayer_event_preprocess_html(&$variables) {
+  // Attach our custom JavaScript library.
+  $variables['#attached']['library'][] = 'custom_datalayer_event/custom_datalayer_event';
+}
