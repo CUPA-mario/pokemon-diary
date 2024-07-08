@@ -1,0 +1,8 @@
+uuid: e0a2c3f9-4892-4c34-bd83-a6669e718638
+langcode: en
+status: true
+dependencies: {  }
+id: trainer-main-menu
+label: 'Trainer Main Menu'
+description: 'Menu for Trainers and authenticated users.'
+locked: false

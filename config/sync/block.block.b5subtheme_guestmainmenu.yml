@@ -1,0 +1,33 @@
+uuid: 1d0343c2-76c3-484b-a9b4-8ef220ca6f5f
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.guest-main-menu
+  module:
+    - system
+    - user
+  theme:
+    - b5subtheme
+id: b5subtheme_guestmainmenu
+theme: b5subtheme
+region: nav_main
+weight: 0
+provider: null
+plugin: 'system_menu_block:guest-main-menu'
+settings:
+  id: 'system_menu_block:guest-main-menu'
+  label: 'Guest Main Menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 3
+  expand_all_items: false
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      anonymous: anonymous

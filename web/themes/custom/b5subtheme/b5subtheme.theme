@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * B5 subtheme theme file.
+ */
+
+/**
+ * Implements b5subtheme_preprocess_region().
+ */
+function b5subtheme_preprocess_region(&$variables) {
+  // Check if the region is the nav_main.
+  if ($variables['region'] === 'nav_main') {
+    // Add a custom CSS class to the nav_main region.
+    $variables['attributes']['class'][] = 'me-auto';
+  }
+}

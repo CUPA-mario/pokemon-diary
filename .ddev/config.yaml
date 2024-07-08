@@ -11,7 +11,10 @@ database:
   version: "10.4"
 use_dns_when_possible: true
 composer_version: "2"
-web_environment: []
+web_environment:
+    - PLATFORMSH_CLI_TOKEN=${PLATFORMSH_CLI_TOKEN}
+    - PLATFORM_ENVIRONMENT=${PLATFORM_ENVIRONMENT}
+    - PLATFORM_PROJECT=${PLATFORM_PROJECT}
 # Key features of DDEV's config.yaml:
 
 # name: <projectname> # Name of the project, automatically provides
@@ -256,8 +259,9 @@ web_environment: []
 # and you can't erase existing hooks or all environment variables.
 # However, with "override_config: true" in a particular config.*.yaml file,
 # 'use_dns_when_possible: false' can override the existing values, and
-# hooks:
-#   post-start: []
+#hooks:
+#  post-start:
+#    - exec-host: ./custom-mysqldump.sh
 # or
 # web_environment: []
 # or

@@ -1,0 +1,8 @@
+pokemon_autocomplete:
+  version: 1.0
+  js:
+    js/pokemon_autocomplete.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupal.autocomplete

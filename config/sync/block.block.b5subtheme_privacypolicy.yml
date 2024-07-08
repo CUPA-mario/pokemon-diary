@@ -1,0 +1,30 @@
+uuid: 62f02dc3-2232-4952-86c3-b47bb67795c9
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:cdac3041-818f-42bc-8bfe-5190934079de'
+  module:
+    - block_content
+    - system
+  theme:
+    - b5subtheme
+id: b5subtheme_privacypolicy
+theme: b5subtheme
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:cdac3041-818f-42bc-8bfe-5190934079de'
+settings:
+  id: 'block_content:cdac3041-818f-42bc-8bfe-5190934079de'
+  label: 'Privacy Policy'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /privacy-policy

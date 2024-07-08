@@ -1,0 +1,35 @@
+uuid: ad2bcb29-3a31-400c-97f7-1d999e31da55
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.trainer-main-menu
+  module:
+    - system
+    - user
+  theme:
+    - b5subtheme
+id: b5subtheme_trainermainmenu
+theme: b5subtheme
+region: nav_main
+weight: 0
+provider: null
+plugin: 'system_menu_block:trainer-main-menu'
+settings:
+  id: 'system_menu_block:trainer-main-menu'
+  label: 'Trainer Main Menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 3
+  expand_all_items: false
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated
+      administrator: administrator
+      trainer: trainer

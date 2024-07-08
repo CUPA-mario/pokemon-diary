@@ -23,9 +23,12 @@ console/
 # Ignore .env files as they are personal
 /.env
 
+# Mac generated
+.DS_Store
+
 # Ignore mounts
 web/sites/default/files
-tmp
+# tmp
 private
 .drush
 drush-backups

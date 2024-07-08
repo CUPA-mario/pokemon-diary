@@ -1,0 +1,23 @@
+pokeapi.import_form:
+  path: "/admin/structure/pokemon-import"
+  defaults:
+    _form: 'Drupal\pokeapi\Form\PokemonImportForm'
+    _title: "Pokémon Import"
+  requirements:
+    _permission: "administer site configuration"
+
+pokeapi.location_import_form:
+  path: "/admin/structure/location-import"
+  defaults:
+    _form: 'Drupal\pokeapi\Form\LocationImportForm'
+    _title: "Location Import"
+  requirements:
+    _permission: "administer site configuration"
+
+pokeapi.taxonomy_autocomplete:
+  path: '/taxonomy/autocomplete/{vocabulary}'
+  defaults:
+    _controller: '\Drupal\pokeapi\Controller\PokemonAutocompleteController::taxonomyAutocomplete'
+    _title: 'Autocomplete taxonomy terms'
+  requirements:
+    _permission: 'access content'

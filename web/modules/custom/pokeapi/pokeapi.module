@@ -1,0 +1,316 @@
+<?php
+
+use Drupal\Component\Utility\Random;
+use Drupal\Core\Render\Markup;
+use Drupal\pokeapi\Helper\PokemonHelper;
+use Drupal\user\Entity\User;
+use Drupal\views\ViewExecutable;
+use Drupal\file\Entity\File;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+/**
+ * Implements hook_views_pre_view().
+ */
+function pokeapi_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+  if ($view->id() == 'trainer_diary_view') {
+    $id = $args[0] ?? '';
+    $user_id = getUser('field_friend_code', $id);
+    // Use current user ID if on page_2 display
+    $args[0] = ($display_id == 'page_2') ? \Drupal::currentUser()->id() : ($user_id ?: $id);
+    // Load the user based on the adjusted $args[0]
+    $user = User::load($args[0]);
+    // Set dynamic value for user header based on loaded user
+    $options = $view->display_handler->getOption('header');
+    try {
+      if (isset($options['entity_user']) && $options['entity_user']) {
+        if ($user !== null) {
+          $user_uuid = $user->uuid();
+          if ($user_uuid !== null) {
+            $options['entity_user']['target'] = $user_uuid;
+          } else {
+            // UUID is null, throw a NotFoundHttpException to trigger a 404 response
+            throw new NotFoundHttpException();
+          }
+        } else {
+          // User is null, throw a NotFoundHttpException to trigger a 404 response
+          throw new NotFoundHttpException();
+        }
+      }
+    } catch (Exception $e) {
+      // Redirect to 404 page
+      throw new NotFoundHttpException();
+    }
+    $view->display_handler->overrideOption('header', $options);
+  }
+}
+
+function pokeapi_views_pre_render(ViewExecutable $view) {
+  if ($view->id() == 'trainer_diary_view') {
+    $args = [];
+    foreach ($view->result as $row) {
+      $args['pokemon_name'] = $row->_entity->get('title')->value ?? '';
+      $args['pokemon_image'] = $row->_entity->get('field_photo')->target_id ?? '';
+      $image_default = PokemonHelper::getDefaultSprite($args);
+      $pokemon_type = PokemonHelper::getType($args['pokemon_name']);
+      if ($row->_entity->hasField('field_photo') && !is_null($image_default)) {
+        $row->_entity->set('field_photo', [
+          'target_id' => $image_default->id() ?? null,
+          'alt' => 'Pokemon Image',
+          'title' => 'Pokemon Image',
+        ]);
+      }
+      if ($row->_entity->hasField('field_types')) {
+        if (empty($row->_entity->get('field_types'))) {
+          $row->_entity->set('field_types', $pokemon_type);
+          $row->_entity->save();
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function pokeapi_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id === 'node_pokemon_form' || $form_id === 'node_pokemon_edit_form') {
+    $form['#attached']['library'][] = 'pokeapi/pokemon_autocomplete';
+    $form['#validate'][] = 'pokeapi_form_validate';
+
+    $title = '<h2>Get started with your <br> Pokémon adventure</h2>';
+    $desc = '<p>Log each Pokémon you catch with all its details.<br>' .
+      'Celebrate every encounter in your personal<br>' .
+      'PokéDiary. Dive into the fun and let your journey<br>unfold.</p>';
+    $form['field_photo']['#prefix'] = $title . $desc;
+
+    // Check if the form has an actions array with a submit button.
+    if (isset($form['actions']['submit']['#value'])) {
+      // Change the text of the save button.
+      $form['actions']['submit']['#value'] = t('Add entry');
+    }
+  }
+  if ($form_id === 'user_form') {
+    if (isset($form['actions']['submit']['#value'])) {
+      // Change the text of the save button.
+      $form['#validate'][] = 'pokeapi_custom_user_validate';
+    }
+  }
+
+  if ($form_id === 'views_exposed_form' && in_array($form['#id'],
+    ['views-exposed-form-trainer-diary-view-page-1','views-exposed-form-trainer-diary-view-page-2'])) {
+    $types = Drupal::service('pokeapi.pokemon_service')->getPokemonTypes();
+    $form['field_types_value']['#type'] = 'select';
+    $form['field_types_value']['#options'][''] = '- All -';
+    $form['field_types_value']['#attributes']['size'] = 1;
+    foreach ($types as $index => $type) {
+      $name = $type['name'];
+      $form['field_types_value']['#options'][$name] = ucfirst($name);
+    }
+
+  }
+}
+
+/**
+ * Custom validation handler for the Pokémon name.
+ */
+function pokeapi_form_validate($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  // Get the value from the form.
+  $field_value = $form_state->getValue('title')[0]['value'];
+
+  // Define the vocabulary ID.
+  $vocabulary_id = 'pokemon';
+
+  // Load terms from the vocabulary.
+  $check = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties([
+    'vid' => $vocabulary_id,
+    'name' => $field_value,
+  ]);
+
+  // Check if the term exists.
+  if (empty($check)) {
+    $form_state->setErrorByName('title', t('Pokémon Name should be valid.'));
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function pokeapi_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {
+  // Check if the inserted entity is a user.
+  if ($entity->getEntityTypeId() == 'user') {
+    // Check if the custom field exists.
+    if ($entity->hasField('field_friend_code')) {
+      // Generate a custom value.
+      $random = new Random();
+      $custom_value = $random->name(12, TRUE);
+      // Set the custom value to the field.
+      $entity->set('field_friend_code', $custom_value);
+      // Save the user entity with the new value.
+      $entity->save();
+    }
+  }
+  if ($entity->getEntityTypeId() == 'node') {
+    if ($entity->hasField('field_types')) {
+      $pokemon = $entity->getTitle();
+      $pokemon_type = PokemonHelper::getType($pokemon);
+      $entity->set('field_types', $pokemon_type);
+      $entity->save();
+    }
+  }
+}
+
+/**
+ * Delete all taxonomy terms from a vocabulary
+ * @param $vid
+ */
+function delete_terms_from_vocab($vid) {
+
+  $tids = Drupal::entityQuery('taxonomy_term')
+    ->condition('vid', $vid)
+    ->accessCheck(false)
+    ->execute();
+
+  if (empty($tids)) {
+    return;
+  }
+
+  $term_storage = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term');
+  $entities = $term_storage->loadMultiple($tids);
+
+  $term_storage->delete($entities);
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+function pokeapi_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+  if ($entity->getEntityTypeId() === 'user') {
+    $base_url = \Drupal::request()->getSchemeAndHttpHost();
+    $friend_code = $entity->get('field_friend_code')->value;
+    $share_url = sprintf('%s/diary/%s', $base_url, $friend_code);
+    $share_links = custom_share_links_generate($share_url);
+    $build['field_friend_code_alt'] = [
+      '#markup' => Markup::create($share_links),
+      '#weight' => 200,
+    ];
+  }
+  if ($entity->getEntityTypeId() === 'node') {
+    // Perform custom logic for node view.
+    $results = [];
+    $types = [];
+    $name = $entity->get('title')->value ?? '';
+    $results = \Drupal::service('pokeapi.pokemon_service')->getPokemonByName($name);
+
+    if ($entity->hasField('field_photo')) {
+      $image_url = $entity->get('field_photo')->target_id ?? '';
+      $file = File::load($image_url);
+
+      if (empty($file)) {
+        $image_url = $results['sprites']['other']['official-artwork']['front_default'];
+        if ($results && $image_url) {
+          $image = sprintf('<img src="%s" />', $image_url);
+          $build['image'] = [
+            '#markup' => '<div class="pokemon-image">'.$image.'</div>',
+            '#weight' => 100,
+          ];
+        }
+      }
+    }
+
+    if ($results && $results['types']) {
+      foreach ($results['types'] as $type) {
+        $types[] = ucwords($type['type']['name']);
+      }
+
+      $build['type'] = [
+        '#markup' => '<div class="pokemon-type"><ul><li>'.implode('</li><li>', $types).'</li></ul></div>',
+        '#weight' => 200,
+      ];
+    }
+
+    if ($entity->hasField('created')) {
+      $created_timestamp = $entity->get('created')->value;
+      $date_created = \Drupal::service('date.formatter')->format($created_timestamp, 'custom', 'd/m/Y');
+
+      $build['date_captured'] = [
+        '#markup' => '<div class="pokemon-date-captured">'.$date_created.'</div>',
+        '#weight' => 300,
+      ];
+    }
+
+    if ($entity->hasField('field_location')) {
+      $location = $entity->get('field_location')->value;
+
+      $build['location'] = [
+        '#markup' => '<div class="pokemon-location">'.$location.'</div>',
+        '#weight' => 400,
+      ];
+    }
+  }
+}
+
+/**
+ * Generates social media share links.
+ *
+ * @param string $url
+ *   The URL to share.
+ *
+ * @return string
+ *   The HTML markup for the share links.
+ */
+function custom_share_links_generate($url) {
+  $facebook_share = 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($url);
+  $twitter_share = 'https://twitter.com/intent/tweet?url=' . urlencode($url);
+  $linkedin_share = 'https://www.linkedin.com/shareArticle?mini=true&url=' . urlencode($url);
+
+  $links = '<ul class="share-links">';
+  $links .= '<li><a href="' . $facebook_share . '" target="_blank" class="share-link share-link-facebook" onclick="window.open(this.href, \'mywin\', \'left=20,top=20,width=500,height=500,toolbar=1,resizable=0\'); return false;">Share on Facebook</a></li>';
+  $links .= '<li><a href="' . $twitter_share . '" target="_blank" class="share-link share-link-twitter" onclick="window.open(this.href, \'mywin\', \'left=20,top=20,width=500,height=500,toolbar=1,resizable=0\'); return false;">Share on Twitter</a></li>';
+  $links .= '<li><a href="' . $linkedin_share . '" target="_blank" class="share-link share-link-linkedin" onclick="window.open(this.href, \'mywin\', \'left=20,top=20,width=500,height=500,toolbar=1,resizable=0\'); return false;">Share on LinkedIn</a></li>';
+  $links .= '</ul>';
+
+  return $links;
+}
+
+/**
+ * Custom form validation function for user.
+ */
+function pokeapi_custom_user_validate($form, &$form_state) {
+  $value = $form_state->getValue('field_friend_code');
+  $current_user = \Drupal::currentUser()->id();
+  $user_id = getUser('field_friend_code', $value);
+  if ($user_id && ($user_id != $current_user)) {
+    $form_state->setErrorByName('field_friend_code', 'Error: a user has already set the same friend code');
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for block templates.
+ */
+function pokeapi_preprocess_block(&$variables) {
+  if ($variables['plugin_id'] == 'system_powered_by_block') {
+    // Change the powered by text.
+    $variables['content']['#markup'] = t('Copyright @year PokeDiary. All rights reserved.', [
+      '@year' => date('Y')
+      ]);
+  }
+}
+
+/**
+ * Fetch user with declared field & value
+ */
+function getUser($field_name, $value) {
+  try {
+    $query = \Drupal::entityQuery('user')
+      ->accessCheck(FALSE)
+      ->condition($field_name, $value);
+    $user_ids = $query->execute();
+    // Use the first user ID if found
+    $user_id = reset($user_ids);
+  } catch (Exception $e) {
+    \Drupal::logger('pokeapi')->warning(
+      'Warning: This user has an empty ' . $field_name .'. Error message: ' . $e->getMessage());
+  }
+  return $user_id;
+}

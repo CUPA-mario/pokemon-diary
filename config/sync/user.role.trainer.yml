@@ -1,9 +1,16 @@
 uuid: f15e220c-8dc1-4630-8e70-8d18a1fa620c
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - node.type.pokemon
+  module:
+    - node
 id: trainer
 label: Trainer
 weight: 4
 is_admin: null
-permissions: {  }
+permissions:
+  - 'create pokemon content'
+  - 'delete own pokemon content'
+  - 'edit own pokemon content'

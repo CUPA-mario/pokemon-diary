@@ -1,0 +1,9 @@
+uuid: bb4bbf99-a090-44b9-abe2-018da51e7bf2
+langcode: en
+status: true
+dependencies: {  }
+name: Location
+vid: location
+description: 'The specific areas or habitats where Pokémon can be found in the Pokémon world.'
+weight: 0
+new_revision: false

@@ -1,0 +1,65 @@
+uuid: 9a4bf3b1-efb0-4f21-826c-819bf6feaabc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.pokemon.field_date_captured
+    - field.field.node.pokemon.field_location
+    - field.field.node.pokemon.field_photo
+    - field.field.node.pokemon.field_types
+    - image.style.thumbnail
+    - node.type.pokemon
+  module:
+    - datetime
+    - image
+id: node.pokemon.default
+targetEntityType: node
+bundle: pokemon
+mode: default
+content:
+  field_date_captured:
+    type: datetime_default
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_location:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_photo:
+    type: image_image
+    weight: 0
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_types: true
+  path: true
+  promote: true
+  sticky: true
+  uid: true

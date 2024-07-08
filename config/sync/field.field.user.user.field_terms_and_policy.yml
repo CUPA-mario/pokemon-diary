@@ -1,0 +1,22 @@
+uuid: 5152c316-e2e9-48cc-9c54-7ab357615f6d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_terms_and_policy
+  module:
+    - user
+id: user.user.field_terms_and_policy
+field_name: field_terms_and_policy
+entity_type: user
+bundle: user
+label: 'Terms and Policy'
+description: 'By registering you agree to the Pokemon Diary''s <a href="/terms-and-conditions" target="_blank">Terms and conditions</a>, including <a href="/privacy-policy" target="_blank">Privacy policies</a>.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

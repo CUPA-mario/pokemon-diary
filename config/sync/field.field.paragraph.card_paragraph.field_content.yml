@@ -1,0 +1,28 @@
+uuid: eaacd61b-a4a2-4bb0-a572-1dd4a76320e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.plain_text
+    - paragraphs.paragraphs_type.card_paragraph
+  module:
+    - text
+id: paragraph.card_paragraph.field_content
+field_name: field_content
+entity_type: paragraph
+bundle: card_paragraph
+label: Content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+    - full_html
+    - plain_text
+field_type: text_long

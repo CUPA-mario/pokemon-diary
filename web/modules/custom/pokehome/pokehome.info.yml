@@ -1,0 +1,6 @@
+name: 'Custom homepage'
+type: module
+description: 'Provides a custom homepage for the PokemonDiary site, enabling the addition of custom hooks and features for an enhanced user experience.'
+package: Custom
+version: 1.0
+core_version_requirement: ^10

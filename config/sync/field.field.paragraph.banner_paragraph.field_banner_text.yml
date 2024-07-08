@@ -1,0 +1,28 @@
+uuid: 3157c4b4-67ae-4b04-b436-6fcb15a68fe5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_banner_text
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.plain_text
+    - paragraphs.paragraphs_type.banner_paragraph
+  module:
+    - text
+id: paragraph.banner_paragraph.field_banner_text
+field_name: field_banner_text
+entity_type: paragraph
+bundle: banner_paragraph
+label: 'Banner Text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+    - full_html
+    - plain_text
+field_type: text

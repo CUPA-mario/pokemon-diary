@@ -1,0 +1,409 @@
+header[role="banner"] {
+  background-color: #93C68E !important;
+}
+
+.navbar a {
+  color: #333333;
+}
+
+footer[role="contentinfo"] {
+  background-color: #FFCB05 !important;
+}
+
+footer.bg-secondary span, footer.bg-secondary a {
+  color: #333333;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+
+body * { /* Change default font of all element to Nunito sans */
+  font-family: "Nunito Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  color: #595959;
+}
+
+h1, h2, h3, h4, h5, h6 { /* Change all headings' font to fredoka */
+  font-family: "Fredoka", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  color: #333333;
+}
+
+body main > div.container > div.region-breadcrumb { /* Hide breadcrumb for all pages */
+  display: none;
+}
+
+/* Non-authenticated pages */
+body.login header,
+body.login footer,
+body.login main > div.container > div.region-breadcrumb,
+body.login main > div.container nav.tabs {
+  display: none;
+}
+
+body.register header,
+body.register footer,
+body.register main > div.container > div.region-breadcrumb,
+body.register main > div.container nav.tabs {
+  display: none;
+}
+
+body.reset-password header,
+body.reset-password footer,
+body.reset-password main > div.container > div.region-breadcrumb,
+body.reset-password main > div.container nav.tabs {
+  display: none;
+}
+
+
+body.login main > div.container,
+body.register main > div.container,
+body.reset-password main > div.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 417px;
+  margin: auto;
+}
+body.register main > div.container {
+  max-width: 720px;
+}
+
+body.login main > div.container div.region.region-content,
+body.register main > div.container div.region.region-content,
+body.reset-password main > div.container div.region.region-content { 
+  background-color: white;
+  border-radius: 6px;
+  padding: 28px 20px;
+}
+body.register main > div.container div.region.region-content {
+  background-color:rgba(255,255,255, .95);
+}
+
+img.pokediary-logo {
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
+}
+
+body.login main {
+  display: flex;
+  height: 100%;
+  background-image: url('../images/login-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-y: auto;
+  padding: 42px 0;
+}
+
+body.register main {
+  display: flex;
+  height: 100%;
+  background-image: url('../images/register-bg.png');
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-y: auto;
+  padding: 42px 0;
+}
+
+body.reset-password main {
+  display: flex;
+  height: 100%;
+  background-image: url('../images/reset-password-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-y: auto;
+  padding: 42px 0;
+}
+
+
+body.register main > div.container div.region.region-content form div.form-wrapper#edit-account {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0 16px;
+}
+body.register main > div.container div.region.region-content form div.form-wrapper#edit-account > div:not(#edit-pass) {
+  flex: 1;
+  margin-bottom: unset;
+}
+body.register main > div.container div.region.region-content form div.form-wrapper#edit-account > div#edit-pass {
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0 16px;
+}
+
+body.register main > div.container div.region.region-content form div.form-wrapper#edit-account > div#edit-pass div.js-form-type-password {
+  flex: 1 1 25%;
+  overflow: unset;
+}
+body.register main > div.container div.region.region-content form div.form-wrapper#edit-account > div#edit-pass div.password-suggestions,
+body.register main > div.container div.region.region-content form div.form-wrapper#edit-account > div#edit-pass div.description {
+  flex: 1 1 100%;
+}
+
+
+body.login main div.form-actions.js-form-wrapper,
+body.register main div.form-actions.js-form-wrapper,
+body.reset-password main div.form-actions.js-form-wrapper {
+  display: flex;
+  margin-bottom: unset;
+}
+
+body.login main div.form-actions.js-form-wrapper input[type="submit"],
+body.register main div.form-actions.js-form-wrapper input[type="submit"],
+body.reset-password main div.form-actions.js-form-wrapper input[type="submit"]{
+  margin-left: auto;
+  background-image: linear-gradient(to right, #E3350D, #9C2208);
+  color: white;
+  font-weight: 500;
+  border-color: unset;
+}
+
+body.login main div.form-actions.js-form-wrapper {
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
+body.login main div.form-actions.js-form-wrapper input[type="submit"] {
+  order: 3;
+  margin-top: 12px;
+}
+body.login .register-link {
+  flex: 1 1 50%;
+  order: 2;
+  text-decoration: none;
+}
+body.login .forgot-password-link {
+  flex: 1 1 50%;
+  order: 1;
+  color: #E3350D;
+  text-decoration: none;
+}
+
+/* Diary list personal - header */
+.diary-list-personal .view-header {
+  background-color: #FDF5E6;
+  padding: 32px;
+}
+.diary-list-personal .view-header article {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+.diary-list-personal .view-header article div.field--name-field-trainer-name .field__label {
+  font-weight: normal;
+  font-size: 14px;
+}
+.diary-list-personal .view-header article div.field--name-field-trainer-name .field__item {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  color: #333333;
+}
+
+.diary-list-personal .view-header article div.field--name-field-friend-code {
+  margin-left: auto;
+  margin-right: 12px;
+}
+.diary-list-personal .view-header article div.field--name-field-friend-code .field__label {
+  font-weight: normal;
+}
+.diary-list-personal .view-header article div.field--name-field-friend-code .field__item {
+  font-weight: bold;
+  font-size: 28px;
+  color: #333333;
+}
+
+
+/* Diary list personal - pokemon list*/
+.diary-list-personal .view-content {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+.diary-list-personal .view-content .views-row {
+  display: table-row;
+}
+.diary-list-personal .view-content .views-row:nth-child(odd) {
+  background-color: #E5F8FB;
+}
+.diary-list-personal .view-content .views-row:nth-child(even) {
+  background-color: #E4F3E0;  
+}
+.diary-list-personal .view-content .views-row .views-field {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+.diary-list-personal .view-content .views-row .views-field span {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  color: #333333;
+}
+.diary-list-personal .view-content .views-row .views-field.views-field-title a {
+  font-family: "Fredoka", sans-serif;
+  font-size: 24px;
+  color: #333333;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.diary-list-personal .view-content .views-row:hover .views-field.views-field-title a {
+  color: transparent;
+  background-image: linear-gradient(to right, #E3350D, #9C2208);
+  -webkit-background-clip: text;
+  transition: background-image 200ms linear;
+}
+
+.diary-list-personal .view-content .views-row .views-field.views-field-title a:hover {
+  border: 0;
+  border-bottom: solid 2px ;
+  border-image: linear-gradient(to right, #E3350D, #9C2208) 1;
+}
+
+.diary-list-personal .view-content .views-row .views-field.views-field-field-photo > .field-content img.img-fluid {
+  width: 100%;
+  max-width: 160px;
+}
+
+
+
+/* Footer */
+footer div.region.region-footer {
+  flex-direction: row;
+  align-items: flex-start;
+}
+footer div.region.region-footer nav {
+  margin-left: 20px;
+}
+footer div.region.region-footer nav ul.nav.navbar-nav {
+  display: flex;
+  flex-direction: row;
+}
+footer div.region.region-footer nav ul.nav.navbar-nav li a {
+  padding: 0 12px;
+}
+
+/* Recent Pokemon Capture  */
+div#block-b5subtheme-views-block-recent-pokemon-capture-block-1 {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+div#block-b5subtheme-views-block-recent-pokemon-capture-block-1 h2 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.container-recent-pokemon .view-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.container-recent-pokemon .view-content .recent-pokemon-item.views-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  max-width: 416px;
+  background-color: #FFFCF0;
+  border: 1px solid #EDEDED;
+  border-radius: 12px;
+
+  padding: 20px 16px;
+  box-sizing: border-box;
+}
+.container-recent-pokemon .view-content .recent-pokemon-item.views-row:hover {
+  background-color: #FDF5E6;
+}
+
+.container-recent-pokemon .view-content .recent-pokemon-item.views-row .views-field {
+  flex: 1 1 100%;
+  margin: auto;
+}
+.container-recent-pokemon .view-content .recent-pokemon-item.views-row .views-field:not(.views-field-title) span {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #333333;
+}
+.container-recent-pokemon .view-content .recent-pokemon-item.views-row .views-field-title {
+  text-align: center;
+}
+.container-recent-pokemon .view-content .recent-pokemon-item.views-row .views-field-title span a {
+  font-family: "Fredoka", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #575554;
+}
+.container-recent-pokemon .view-content .recent-pokemon-item.views-row .views-field-field-photo {
+  max-width: 248px;
+}
+.container-recent-pokemon .view-content .recent-pokemon-item.views-row .views-field-field-types,
+.container-recent-pokemon .view-content .recent-pokemon-item.views-row .views-field-field-location {
+  flex: 1 1 calc(50% - 12px);
+  box-sizing: border-box;
+}
+.container-recent-pokemon .view-content .recent-pokemon-item.views-row .views-field-field-location .field-content a {
+  text-decoration: none;
+}
+
+/* Testimonials - home page */ 
+
+body.page-node-type-testimonials main div.container div.region-content,
+.container-testimonials .item-testimony.views-row {
+  max-width: 712px;
+  margin-bottom: 20px;
+  border: 1px solid #EDEDED;
+  border-radius: 12px;
+
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+body.page-node-type-testimonials main div.container div.region-content {
+  margin-top: 32px;
+  margin-bottom: unset;
+}
+body.page-node-type-testimonials main div.container div.region-content article .field {
+  margin: 12px auto;
+}
+body.page-node-type-testimonials main div.container div.region-content div h1,
+body.page-node-type-testimonials main div.container div.region-content article .field__label {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+}
+.container-testimonials .item-testimony.views-row .views-field-title .field-content a {
+  font-family: "Fredoka", sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.container-testimonials .item-testimony.views-row .views-field-field-trainer-name .field-content {
+  margin-top: 12px;
+  text-align: center;
+  color: #CCCCCC;
+}
+.container-testimonials .item-testimony.views-row .views-field-field-trainer-name .field-content::before {
+  content: '-';
+}
+
+/* Pokemon page - individual view */
+body.page-node-type-pokemon main div.region.region-content {
+
+}
