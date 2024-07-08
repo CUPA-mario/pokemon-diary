@@ -71,6 +71,17 @@ class PokemonService {
   }
 
   /**
+   * Fetches Pokémon type data from PokeAPI.
+   *
+   * @return array
+   *   An array of Pokémon type.
+   */
+  public function getPokemonTypes() {
+    $response = $this->execute('/type', ['limit' => 1500]);
+    return $response ? $response['results'] : [];
+  }
+
+  /**
    * Fetches Pokémon data from PokeAPI.
    *
    * @return array

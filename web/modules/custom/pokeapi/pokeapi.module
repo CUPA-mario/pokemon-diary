@@ -51,7 +51,7 @@ function pokeapi_views_pre_render(ViewExecutable $view) {
       $args['pokemon_name'] = $row->_entity->get('title')->value ?? '';
       $args['pokemon_image'] = $row->_entity->get('field_photo')->target_id ?? '';
       $image_default = PokemonHelper::getDefaultSprite($args);
-      $pokemon_type = PokemonHelper::getType( $args['pokemon_name']);
+      $pokemon_type = PokemonHelper::getType($args['pokemon_name']);
       if ($row->_entity->hasField('field_photo') && !is_null($image_default)) {
         $row->_entity->set('field_photo', [
           'target_id' => $image_default->id() ?? null,
@@ -95,6 +95,19 @@ function pokeapi_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_s
       $form['#validate'][] = 'pokeapi_custom_user_validate';
     }
   }
+
+  if ($form_id === 'views_exposed_form' && in_array($form['#id'],
+    ['views-exposed-form-trainer-diary-view-page-1','views-exposed-form-trainer-diary-view-page-2'])) {
+    $types = Drupal::service('pokeapi.pokemon_service')->getPokemonTypes();
+    $form['field_types_value']['#type'] = 'select';
+    $form['field_types_value']['#options'][''] = '- All -';
+    $form['field_types_value']['#attributes']['size'] = 1;
+    foreach ($types as $index => $type) {
+      $name = $type['name'];
+      $form['field_types_value']['#options'][$name] = ucfirst($name);
+    }
+
+  }
 }
 
 /**
@@ -133,6 +146,14 @@ function pokeapi_entity_insert(\Drupal\Core\Entity\EntityInterface $entity) {
       // Set the custom value to the field.
       $entity->set('field_friend_code', $custom_value);
       // Save the user entity with the new value.
+      $entity->save();
+    }
+  }
+  if ($entity->getEntityTypeId() == 'node') {
+    if ($entity->hasField('field_types')) {
+      $pokemon = $entity->getTitle();
+      $pokemon_type = PokemonHelper::getType($pokemon);
+      $entity->set('field_types', $pokemon_type);
       $entity->save();
     }
   }
